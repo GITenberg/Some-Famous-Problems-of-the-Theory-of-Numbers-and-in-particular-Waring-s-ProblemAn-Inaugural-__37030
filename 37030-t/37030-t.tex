@@ -1,0 +1,2561 @@
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %
+%                                                                         %
+% The Project Gutenberg EBook of Some Famous Problems of the Theory of    %
+% Numbers and in particular Waring's Problem, by G. H. (Godfrey Harold) Hardy
+%                                                                         %
+% This eBook is for the use of anyone anywhere at no cost and with        %
+% almost no restrictions whatsoever.  You may copy it, give it away or    %
+% re-use it under the terms of the Project Gutenberg License included     %
+% with this eBook or online at www.gutenberg.net                          %
+%                                                                         %
+%                                                                         %
+% Title: Some Famous Problems of the Theory of Numbers and in particular Waring's Problem
+%        An Inaugural Lecture delivered before the University of Oxford   %
+%                                                                         %
+% Author: G. H. (Godfrey Harold) Hardy                                    %
+%                                                                         %
+% Release Date: August 10, 2011 [EBook #37030]                            %
+%                                                                         %
+% Language: English                                                       %
+%                                                                         %
+% Character set encoding: ISO-8859-1                                      %
+%                                                                         %
+% *** START OF THIS PROJECT GUTENBERG EBOOK FAMOUS PROBLEMS OF THEORY OF NUMBERS ***
+%                                                                         %
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %
+
+\def\ebook{37030}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                  %%
+%% Packages and substitutions:                                      %%
+%%                                                                  %%
+%% book:     Required.                                              %%
+%% inputenc: Standard DP encoding. Required.                        %%
+%%                                                                  %%
+%% ifthen:   Logical conditionals. Required.                        %%
+%%                                                                  %%
+%% amsmath:  AMS mathematics enhancements. Required.                %%
+%% amssymb:  Additional mathematical symbols. Required.             %%
+%%                                                                  %%
+%% alltt:    Fixed-width font environment. Required.                %%
+%% caption:  Caption enhancements. Required.                        %%
+%% array:    Enhanced tabular features. Required.                   %%
+%%                                                                  %%
+%% geometry: Enhanced page layout package. Required.                %%
+%% fancyhdr: Enhanced page headers. Required.                       %%
+%% hyperref: Hypertext embellishments for pdf output. Required.     %%
+%%                                                                  %%
+%%                                                                  %%
+%% Producer's Comments:                                             %%
+%%                                                                  %%
+%%   Changes are noted in this file in two ways.                    %%
+%%   1. \DPtypo{}{} for typographical corrections, showing original %%
+%%      and replacement text side-by-side.                          %%
+%%   2. [** TN: Note]s for lengthier or stylistic comments.         %%
+%%                                                                  %%
+%% Compilation Flags:                                               %%
+%%                                                                  %%
+%%   The following behavior may be controlled by boolean flags.     %%
+%%                                                                  %%
+%%   ForPrinting (false by default):                                %%
+%%   Compile a screen-optimized PDF file. Set to true for print-    %%
+%%   optimized file (large text block, two-sided layout, black      %%
+%%   hyperlinks).                                                   %%
+%%                                                                  %%
+%%   Both print and screen layout are relatively loose.             %%
+%%                                                                  %%
+%%                                                                  %%
+%% PDF pages: 46 (if ForPrinting set to false)                      %%
+%% PDF page size: 4.75 x 7" (non-standard)                          %%
+%% PDF document info: filled in                                     %%
+%%                                                                  %%
+%%                                                                  %%
+%% Command block:                                                   %%
+%%                                                                  %%
+%%     pdflatex x2                                                  %%
+%%                                                                  %%
+%%                                                                  %%
+%%                                                                  %%
+%% August 2011: pglatex.                                            %%
+%%   Compile this project with:                                     %%
+%%   pdflatex 37030-t.tex ..... TWO times                           %%
+%%                                                                  %%
+%%   pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6)                 %%
+%%                                                                  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\listfiles
+\documentclass[12pt]{book}[2007/10/19]
+
+\usepackage[latin1]{inputenc}[2008/03/30]
+
+\usepackage{ifthen}[2001/05/26]  %% Logical conditionals
+
+\usepackage{amsmath}[2000/07/18] %% Displayed equations
+\usepackage{amssymb}[2009/06/22] %% and additional symbols
+
+\usepackage{alltt}[1997/06/16]   %% boilerplate, credits, license
+
+\usepackage[labelformat=empty]{caption}
+\usepackage{array}[2008/09/09]   %% extended array/tabular features
+
+% for running heads
+\usepackage{fancyhdr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Interlude:  Set up PRINTING (default) or SCREEN VIEWING %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% ForPrinting=true (default)           false
+% Asymmetric margins                   Symmetric margins
+% Black hyperlinks                     Blue hyperlinks
+% Start Preface, ToC, etc. recto       No blank verso pages
+%
+\newboolean{ForPrinting}
+
+%% UNCOMMENT the next line for a PRINT-OPTIMIZED VERSION of the text %%
+%\setboolean{ForPrinting}{true}
+
+%% Initialize values to ForPrinting=false
+\newcommand{\Margins}{hmarginratio=1:1}     % Symmetric margins
+\newcommand{\HLinkColor}{blue}              % Hyperlink color
+\newcommand{\PDFPageLayout}{SinglePage}
+\newcommand{\TransNote}{Transcriber's Note}
+\newcommand{\TransNoteCommon}{%
+  Minor typographical corrections and presentational changes have
+  been made without comment.
+  \bigskip
+}
+
+\newcommand{\TransNoteText}{%
+  \TransNoteCommon
+
+  This PDF file is optimized for screen viewing, but may easily be
+  recompiled for printing. Please see the preamble of the \LaTeX\
+  source file for instructions.
+}
+%% Re-set if ForPrinting=true
+\ifthenelse{\boolean{ForPrinting}}{%
+  \renewcommand{\Margins}{hmarginratio=2:3} % Asymmetric margins
+  \renewcommand{\HLinkColor}{black}         % Hyperlink color
+  \renewcommand{\PDFPageLayout}{TwoPageRight}
+  \renewcommand{\TransNote}{Transcriber's Note}
+  \renewcommand{\TransNoteText}{%
+    \TransNoteCommon
+
+    This PDF file is optimized for printing, but may easily be
+    recompiled for screen viewing. Please see the preamble of the
+    \LaTeX\ source file for instructions.
+  }
+}{% If ForPrinting=false, don't skip to recto
+  \renewcommand{\cleardoublepage}{\clearpage}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%  End of PRINTING/SCREEN VIEWING code; back to packages  %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifthenelse{\boolean{ForPrinting}}{%
+  \setlength{\paperwidth}{8.5in}%
+  \setlength{\paperheight}{11in}%
+  \usepackage[body={5in,8in},\Margins]{geometry}[2010/09/12]
+}{%
+  \setlength{\paperwidth}{4.75in}%
+  \setlength{\paperheight}{7in}%
+  \raggedbottom
+  \usepackage[body={4.5in,6in},\Margins,includeheadfoot]{geometry}[2010/09/12]
+}
+
+\providecommand{\ebook}{00000}    % Overridden during white-washing
+\usepackage[pdftex,
+  hyperfootnotes=false,
+  pdftitle={The Project Gutenberg eBook \#\ebook: Some Famous Problems of the Theory of Numbers and in particular Waring's Problem},
+  pdfauthor={G. H. Hardy},
+  pdfkeywords={Brenda Lewis, Anna Hall,
+               Project Gutenberg Online Distributed Proofreading Team},
+  pdfstartview=Fit,    % default value
+  pdfstartpage=1,      % default value
+  pdfpagemode=UseNone, % default value
+  bookmarks=true,      % default value
+  linktocpage=false,   % default value
+  pdfpagelayout=\PDFPageLayout,
+  pdfdisplaydoctitle,
+  pdfpagelabels=true,
+  bookmarksopen=true,
+  bookmarksopenlevel=1,
+  colorlinks=true,
+  linkcolor=\HLinkColor]{hyperref}[2011/04/17]
+
+%%%% Fixed-width environment to format PG boilerplate %%%%
+\newenvironment{PGtext}{%
+\begin{alltt}
+\fontsize{8.1}{9}\ttfamily\selectfont}%
+{\end{alltt}}
+
+% Running heads
+\newcommand{\FlushRunningHeads}{\clearpage\fancyhf{}\cleardoublepage}
+
+\newcommand{\BookMark}[2]{\phantomsection\pdfbookmark[#1]{#2}{#2}}
+
+%% Major document divisions %%
+\newcommand{\PGBoilerPlate}{%
+  \pagenumbering{Alph}
+  \pagestyle{empty}
+  \BookMark{0}{PG Boilerplate.}
+}
+\newcommand{\FrontMatter}{%
+  \cleardoublepage
+  \frontmatter
+  \pagestyle{empty}
+}
+
+\newcommand{\MainMatter}{%
+  \FlushRunningHeads
+  \mainmatter
+  \pagestyle{fancy}
+  \fancyhf{}
+  \setlength{\headheight}{15pt}
+  \thispagestyle{plain}
+  \fancyhead[CE]{SOME FAMOUS PROBLEMS OF}
+  \fancyhead[CO]{THE THEORY OF NUMBERS}
+  \renewcommand{\headrulewidth}{0pt}
+
+  \ifthenelse{\boolean{ForPrinting}}
+             {\fancyhead[RO,LE]{\thepage}}
+             {\fancyhead[R]{\thepage}}
+}
+
+\newcommand{\BackMatter}{%
+  \FlushRunningHeads
+  \backmatter
+  \BookMark{-1}{Back Matter.}
+}
+
+%%Tables
+\newcommand{\Table}[1]{%
+  \phantomsection\label{table:#1}%
+  \caption{TABLE #1}%
+}
+
+\newcommand{\TableRef}[2]{%
+\hyperref[table:#2]{#1}%
+}
+
+\DeclareInputMath{183}{\cdot}
+
+\newcommand{\Title}[1]{\section*{\centering #1}}
+\newcommand{\First}[1]{\textsc{#1}}
+
+\newlength{\TmpLen}
+% For Table I. \Tally[sign]{number}; sign defaults to +
+\newcommand{\Tally}[2][+]{%
+  \settowidth{\TmpLen}{\ensuremath{99,999.999}}%
+  \makebox[\TmpLen][s]{$#1$\hfill$#2$}%
+}
+
+\newcommand{\ColHead}[1]{\multicolumn{1}{c}{#1}}
+\newcommand{\EmDash}{\text{---}}
+\newcommand{\EnDash}{\text{--}}
+
+\newcommand{\Thint}{\makebox[8pt][c]{\ensuremath{\displaystyle\int}}}
+\newcommand{\iiiiint}{\;\Thint\Thint\Thint\Thint\Thint\;}
+
+\newcommand{\DPtypo}[2]{#2}
+\newcommand{\DPnote}[1]{}
+
+\renewcommand{\leq}{\leqq}
+\renewcommand{\geq}{\geqq}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\S}{\raisebox{-0.5ex}{\textbf{\large S}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%% START OF DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\PGBoilerPlate
+\small
+\begin{PGtext}
+The Project Gutenberg EBook of Some Famous Problems of the Theory of
+Numbers and in particular Waring's Problem, by G. H. (Godfrey Harold) Hardy
+
+This eBook is for the use of anyone anywhere at no cost and with
+almost no restrictions whatsoever.  You may copy it, give it away or
+re-use it under the terms of the Project Gutenberg License included
+with this eBook or online at www.gutenberg.net
+
+
+Title: Some Famous Problems of the Theory of Numbers and in particular Waring's Problem
+       An Inaugural Lecture delivered before the University of Oxford
+
+Author: G. H. (Godfrey Harold) Hardy
+
+Release Date: August 10, 2011 [EBook #37030]
+
+Language: English
+
+Character set encoding: ISO-8859-1
+
+*** START OF THIS PROJECT GUTENBERG EBOOK FAMOUS PROBLEMS OF THEORY OF NUMBERS ***
+\end{PGtext}
+\clearpage
+\begin{PGtext}
+Produced by Anna Hall, Brenda Lewis and the Online
+Distributed Proofreading Team at http://www.pgdp.net (This
+file was produced from images generously made available
+by The Internet Archive/American Libraries.)
+\end{PGtext}
+\vfill
+
+\BookMark{0}{Transcriber's Note}
+\subsection*{\centering\normalfont\scshape
+\normalsize\MakeLowercase{\TransNote}}
+
+\TransNoteText
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% FRONT MATTER %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\FrontMatter
+%% -----File: 001.png---
+\begin{center}
+
+\textbf{\LARGE SOME FAMOUS PROBLEMS} \\
+\vfill
+
+of the \\[12pt]
+\vfill
+
+\textbf{\LARGE THEORY OF NUMBERS} \\
+\vfill
+
+and in particular \\[12pt]
+\vfill
+
+{\LARGE Waring's Problem} \\
+\vfill
+\vfill
+
+\textit{An Inaugural Lecture delivered before the \\
+University of Oxford}
+\vfill
+
+{\scriptsize BY} \\
+\vfill
+
+\textbf{G.~H. HARDY, M.A., F.R.S\@.} \\
+\medskip
+{\itshape\scriptsize Fellow of New College \\
+Savilian Professor of Geometry in the University of Oxford \\
+and late Fellow of Trinity College, Cambridge\par}
+\vfill
+\vfill
+
+OXFORD \\
+AT THE CLARENDON PRESS \\
+1920
+\end{center}
+%% -----File: 002.png---
+%[Blank Page]
+%% -----File: 003.png---
+\iffalse %%duplicate of previous page
+SOME  FAMOUS  PROBLEMS
+of the
+THEORY OF NUMBERS
+and in particular
+Waring's  Problem
+
+\textit{An Inaugural Lecture delivered before the
+University of Oxford}
+
+BY
+
+G.~H. HARDY, M.A., F.R.S\@.
+
+\textit{Fellow of New College
+Savilian Professor of Geometry in the University of Oxford
+and late Fellow of Trinity College, Cambridge}
+
+OXFORD
+
+AT THE  CLARENDON  PRESS
+
+1920
+\fi
+%% -----File: 004.png---
+\newpage
+\begin{center}
+\null\vfill
+
+OXFORD UNIVERSITY PRESS \\
+{\scriptsize LONDON EDINBURGH GLASGOW NEW YORK \\
+TORONTO MELBOURNE CAPE TOWN BOMBAY\par}
+\smallskip
+HUMPHREY MILFORD \\
+{\scriptsize PUBLISHER TO THE UNIVERSITY}
+\vfill
+
+\end{center}
+%% -----File: 005.png---
+\MainMatter
+\Title{SOME FAMOUS PROBLEMS OF THE
+THEORY OF NUMBERS.}
+
+\First{It} is expected that a professor who delivers an inaugural
+lecture should choose a subject of wider interest than those
+which he expounds to his ordinary classes. This custom is
+entirely reasonable; but it leaves a pure mathematician
+faced by a very awkward dilemma. There are subjects in
+which only what is trivial is easily and generally comprehensible.
+Pure mathematics, I am afraid, is one of them;
+indeed it is more: it is perhaps the one subject in the
+world of which it is true, not only that it is genuinely
+difficult to understand, not only that no one is ashamed of
+inability to understand it, but even that most men are
+more ready to exaggerate than to dissemble their lack of
+understanding.
+
+There is one method of meeting such a situation which
+is sometimes adopted with considerable success. The
+lecturer may set out to justify his existence by enlarging
+upon the overwhelming importance, both to his University
+and to the community in general, of the particular studies on
+which he is engaged. He may point out how ridiculously
+inadequate is the recognition at present afforded to them;
+how urgent it is in the national interest that they should be
+largely and immediately re-endowed; and how immensely
+all of us would benefit were we to entrust him and his
+colleagues with a predominant voice in all questions of
+educational administration. I have observed friends of my
+own, promoted to chairs of various subjects in various
+%% -----File: 006.png---
+Universities, addressing themselves to this task with an
+eloquence and courage which it would be impertinent in me
+to praise. For my own part, I trust that I am not lacking
+in respect either for my subject or myself. But, if I am
+asked to explain how, and why, the solution of the problems
+which occupy the best energies of my life is of
+importance in the general life of the community, I must
+decline the unequal contest: I have not the effrontery to
+develop a thesis so palpably untrue. I must leave it to the
+engineers and the chemists to expound, with justly prophetic
+fervour, the benefits conferred on civilization by
+gas-engines, oil, and explosives. If I could attain every
+scientific ambition of my life, the frontiers of the Empire
+would not be advanced, not even a black man would be
+blown to pieces, no one's fortune would be made, and least
+of all my own. A pure mathematician must leave to
+happier colleagues the great task of alleviating the sufferings
+of humanity.
+
+I suppose that every mathematician is sometimes depressed,
+as certainly I often am myself, by this feeling of
+helplessness and futility. I do not profess to have any
+very satisfactory consolation to offer. It is possible that
+the life of a mathematician is one which no perfectly
+reasonable man would elect to live. There are, however,
+one or two reflections from which I have sometimes found
+it possible to extract a certain amount of comfort. In the
+first place, the study of mathematics is, if an unprofitable,
+a perfectly harmless and innocent occupation, and we have
+learnt that it is something to be able to say that at any
+rate we do no harm. Secondly, the scale of the universe
+is large, and, if we are wasting our time, the waste of the
+lives of a few university dons is no such overwhelming
+catastrophe. Thirdly, what we do may be small, but it
+has a certain character of permanence; and to have produced
+%% -----File: 007.png---
+anything of the slightest permanent interest, whether
+it be a copy of verses or a geometrical theorem, is to have
+done something utterly beyond the powers of the vast
+majority of men. And, finally, the history of our subject
+does seem to show conclusively that it is no such mean
+study after all. The mathematicians of the past have not
+been neglected or despised; they have been rewarded in a
+manner, undiscriminating perhaps, but certainly not ungenerous.
+At all events we can claim that, if we are
+foolish in the object of our devotion, we are only in our
+small way aping the folly of a long line of famous men,
+and that, in these days of conflict between ancient and
+modern studies, there must surely be something to be said
+for a study which did not begin with Pythagoras, and will
+not end with Einstein, but is the oldest and the youngest
+of all.
+
+It seemed to me for a moment, when I was considering
+what subject I should choose, that there was perhaps one
+which might, in a philosophic University like this, be of
+wider interest than ordinary technical mathematics. If
+modern pure mathematics has any important applications,
+they are the applications to philosophy made by the mathematical
+logicians of the last thirty years. In the sphere of
+philosophy we mathematicians put forward a strictly
+limited but absolutely definite claim. We do not claim
+that we hold in our hands the key to all the riddles of
+existence, or that our mathematics gives us a vision of
+reality to which the less fortunate philosopher cannot
+attain; but we do claim that there are a number of
+puzzles, of an abstract and elusive kind, with which the
+philosophers of the past have struggled ineffectually, and
+of which we now can give a quite definite and explicit
+solution. There is a certain region of philosophical territory
+which it is our intention to annex. It is a strictly
+%% -----File: 008.png---
+demarcated region, but it has suffered under the misrule of
+philosophers for generations, and it is ours by right; we
+propose to accept the mandate for it, and to offer it the
+opportunity of self-determination under the mathematical
+flag. Such at any rate is the thesis which I hope it may
+before long be my privilege to defend.
+
+It seemed to me, however, when I considered the matter
+further, that there are two fatal objections to mathematical
+philosophy as a subject for an inaugural address. In the
+first place the subject is one which requires a certain
+amount of application and preliminary study. It is not
+that it is a subject, now that the foundations have been
+laid, of any extraordinary difficulty or obscurity; nor that
+it demands any wide knowledge of ordinary mathematics.
+But there are certain things that it does demand; a little
+thought and patience, a little respect for mathematics, and
+a little of the mathematical habit of mind which comes
+fully only after long years spent in the company of mathematical
+ideas. Something, in short, may be learnt in a
+term, but hardly in a casual hour.
+
+In the second place, I think that a professor should
+choose, for his inaugural lecture, a subject, if such a subject
+exists, to which he has made himself some contribution of
+substance and about which he has something new to say.
+And about mathematical philosophy I have nothing new to
+say; I can only repeat what has been said by the men,
+Cantor and Frege in Germany, Peano in Italy, Russell and
+Whitehead in England, who have originated the subject
+and moulded it now into something like a definite form.
+It would be an insult to my new University to offer it
+a watered synopsis of some one else's work. I have therefore
+finally decided, after much hesitation, to take a subject
+which is quite frankly mathematical, and to give a
+summary account of the results of some researches which,
+%% -----File: 009.png---
+whether or no they contain anything of any interest or
+importance, have at any rate the merit that they represent
+the best that I can do.
+
+My own favourite subject has certain redeeming advantages.
+It is a subject, in the first place, in which a large
+proportion of the most remarkable results are by no means
+beyond popular comprehension. There is nothing in the
+least popular about its \emph{methods}; as to its votaries it is the
+most beautiful, so by common consent it is the most difficult
+of all branches of a difficult science; but many of the
+actual results are such as can be stated in a simple and
+striking form. The subject has also a considerable historical
+connexion with this particular chair. I do not wish to
+exaggerate this connexion. It must be admitted that the
+contributions of English mathematicians to the Theory of
+Numbers have been, in the aggregate, comparatively slight.
+Fermat was not an Englishman, nor Euler, nor Gauss, nor
+Dirichlet, nor Riemann; and it is not Oxford or Cambridge,
+but Göttingen, that is the centre of arithmetical research
+to-day. Still, there has been an English connexion, and it
+has been for the most part a connexion with Oxford and
+with the Savilian chair.
+
+The connexion of Oxford with the theory of numbers is
+in the main a nineteenth-century connexion, and centres
+naturally in the names of Sylvester and Henry Smith.
+There is a more ancient, if indirect, connexion which I
+ought not altogether to forget. The theory of numbers,
+more than any other branch of pure mathematics, has
+begun by being an empirical science. Its most famous
+theorems have all been conjectured, sometimes a hundred
+years or more before they have been proved; and they
+have been suggested by the evidence of a mass of computation.
+Even now there is a considerable part to be
+played by the computer; and a man who has to undertake
+%% -----File: 010.png---
+laborious arithmetical computations is hardly likely to
+forget what he owes to Briggs. However, this is ancient
+history, and it is with Sylvester and Smith that I am
+concerned to-day, and more particularly with Smith.
+
+Henry Smith was very many things, but above all things
+a most brilliant arithmetician. Three-quarters of the first
+volume of his memoirs is occupied with the theory of
+numbers, and Dr.~Glaisher, his mathematical biographer,
+has observed very justly that, even when he is primarily
+concerned with other matters, the most striking feature of
+his work is the strongly arithmetical spirit which pervades
+the whole. His most remarkable contributions to the
+theory are contained in his memoirs on the arithmetical
+theory of forms, and in particular in the famous memoir on
+the representation of numbers by sums of five squares,
+crowned by the Paris Academy and published only after
+his death. This memoir is peculiarly interesting to me, for
+the problem is precisely one of those of which I propose to
+speak to-day; and I may perhaps add one comment on the
+surprising history set out in Dr.~Glaisher's introduction.
+The name of Minkowski is familiar to-day to many, even
+in Oxford, who have certainly never read a line of Smith.
+It is curious to contemplate at a distance the storm of
+indignation which convulsed the mathematical circles of
+England when Smith, bracketed after his death with the
+then unknown German mathematician, received a greater
+honour than any that had been paid to him in life.
+
+The particular problems with which I am concerned
+belong to what is called the `additive' side of higher
+arithmetic. The general problem may be stated as follows.
+
+Suppose that $n$~is any positive integer, and
+\[
+\alpha_{1},\thickspace \alpha_{2},\thickspace \alpha_{3},\thickspace \dots
+\]
+positive integers of some special kind, squares, for example,
+%% -----File: 011.png---
+or cubes, or perfect $k$th~powers, or primes. We consider all
+possible expressions of~$n$ in the form
+\[
+n = \alpha_{1} + \alpha_{2} + \dots + \alpha_{s},
+\]
+where $s$~may be fixed or unrestricted, the $\alpha$'s may or may
+not be necessarily distinct, and order may or may not be
+relevant, according to the particular problem on which we
+are engaged. We denote by
+\[
+r(n)
+\]
+the number of representations which satisfy the conditions
+of the problem. Then \emph{what can we say about~$r(n)$}? Can
+we find an exact formula for~$r(n)$, or an approximate formula
+valid for large values of~$n$? In particular, is $r(n)$ \emph{always
+positive}? Is it always possible, that is to say, to find at
+least \emph{one} representation of~$n$ of the type required? Or, if
+this is not so, is it at any rate always possible when $n$~is
+sufficiently large?
+
+I can illustrate the nature of the general problem most
+simply by considering for a moment an entirely trivial
+case. Let us suppose that there are three different~$\alpha$'s only,
+viz.\ the numbers $1$,~$2$,~$3$; that repetitions of the same~$\alpha$ are
+permissible; that the order of the~$\alpha$'s is irrelevant; and
+that~$s$, the number of the~$\alpha$'s, is unrestricted. Then it is
+easy to see that $r(n)$, the number of representations, is the
+number of solutions of the equation
+\[
+n = x + 2y + 3z
+\]
+in positive integers, including zero.
+
+There are various ways of solving this extremely simple
+problem. The most interesting for our present purpose is
+that which rests on an analytical foundation, and uses the
+idea of the \emph{generating function}
+\[
+f(x) = 1 + \sum_{1}^{\infty} r(n)x^{n},
+\]
+%% -----File: 012.png---
+in which the coefficients are the values of the arithmetical
+function~$r(n)$. It follows immediately from the definition
+of~$r(n)$ that
+\begin{multline*}
+f(x) = (1 + x + x^{2} + \dots)(1 + x^{2} + x^{4} + \dots)(1 + x^{3} + x^{6} + \dots)\\
+     = \frac{1}{(1 - x)(1 - x^{2})(1 - x^{3})};
+\end{multline*}
+and, in order to determine the coefficients in the expansion,
+nothing more than a little elementary algebra is required.
+We find, by the ordinary theory of partial fractions, that
+\begin{multline*}
+f(x) = \frac{1}{6(1 - x)^{3}} + \frac{1}{4(1 - x)^{2}}
+     + \frac{17}{72(1 - x)} + \frac{1}{8(1 + x)}\\
+     + \frac{1}{9(1 - \omega x)} + \frac{1}{9(1 - \omega^{2} x)},
+\end{multline*}
+where $\omega$~and~$\omega^{2}$ denote as usual the two complex cube roots
+of unity. Expanding the fractions, and picking out the
+coefficient of~$x^{n}$, we obtain
+\[
+r(n) = \frac{(n + 3)^{2}}{12} - \frac{7}{72} + \frac{(-1)^{n}}{8} + \frac{2}{9} \cos \frac{2n\pi}{3}.
+\]
+It is easily verified that the sum of the last three terms
+can never be as great as~$\frac{1}{2}$, so that $r(n)$~is the integer
+nearest to
+\[
+\frac{(n + 3)^{2}}{12}.
+\]
+
+The problem is, as I said, quite trivial, but it is interesting
+none the less. A great deal of work has been done
+on problems similar in kind, though naturally far more
+complex and difficult in detail, by Cayley and Sylvester,
+for example, in the last century, and by Glaisher, and
+above all by \DPtypo{Macmahon}{MacMahon}, in this. And even this problem,
+%% -----File: 013.png---
+simple as it is, has sufficient content to bring out clearly
+certain principles of cardinal importance.
+
+In particular, the solution of the problem shows quite
+clearly that, if we are to attack these `additive' problems
+by analytic methods, it is in the theory of integral power
+series
+\[
+  \sum a_{n} x^{n}
+\]
+that the necessary machinery must be found. It is this
+characteristic which distinguishes this theory sharply from
+the other great side of the analytic theory of numbers, the
+`multiplicative' theory, in which the fundamental idea is
+that of the resolution of a number into primes. In the
+latter theory the right weapon is generally not a power
+series, but what is called a Dirichlet's series, a series of the
+type
+\[
+  \sum a_{n} n^{-s}.
+\]
+It is easy to see this by considering a simple example.
+One of the most interesting functions of the multiplicative
+theory is~$d(n)$, the number of divisors of~$n$. The associated
+power series
+\[
+ \sum d(n) x^{n}
+\]
+is easily transformed into the series
+\[
+ \sum \frac{x^{n}}{1 - x^{n}},
+\]
+called Lambert's series. The function is an interesting
+one, but somewhat unmanageable, and certainly not one of
+the fundamental functions of analysis. The corresponding
+Dirichlet's series is far more fundamental; it is in fact
+\[
+  \sum \frac{d(n)}{n^{s}} = \left(\sum \frac{1}{n^{s}}\right)^{2}
+    = \Big(\zeta (s)\Big)^{2},
+\]
+the square of the famous Zeta function of Riemann.
+%% -----File: 014.png---
+
+The underlying reason for this distinction is fairly
+obvious. It is natural to \emph{multiply} primes and unnatural
+to \emph{add} them. Now
+\[
+  m^{-s} × n^{-s} = (mn)^{-s},
+\]
+so that, in the theory of Dirichlet's series, the terms
+combine naturally with one another in a `multiplicative'
+manner. But
+\[
+  x^{m} × x^{n} = x^{m + n},
+\]
+so that the multiplication of two terms of a power series
+involves an additive operation on their ranks. It is
+thus that the Dirichlet's series rather than the power
+series proves to be the proper weapon in the theory of
+primes.
+
+It would be difficult for anybody to be more profoundly
+interested in anything than I am in the theory of primes;
+but it is not of this theory that I propose to speak to-day,
+and we must return to our general additive problem. As
+soon as we try to specialize the problem in some more
+interesting manner, two problems stand out as calling for
+research. Each of them, naturally, is only the representative
+of a class.
+
+The first of these problems is the \emph{problem of partitions}.
+Let us suppose now that the $\alpha$'s are \emph{any} positive integers,
+and that (as in the trivial problem) repetitions are allowed,
+order is irrelevant, and $s$~is unrestricted. The problem is
+then that of expressing~$n$ in any manner as a sum of
+integral parts, or of solving the equation
+\[
+  n = x + 2y + 3z + 4u + 5v + \dots,
+\]
+and $r(n)$ or, as it is now more naturally written, $p(n)$, is
+the number of \emph{unrestricted partitions} of~$n$. Thus
+\begin{multline*}
+  5 = 1 + 1 + 1 + 1 + 1 = 1 + 1 + 1 + 2\\
+    = 1 + 2 + 2 = 1 + 1 + 3 = 2 + 3 = 1 + 4 = 5,
+\end{multline*}
+%% -----File: 015.png---
+so that $p(5) = 7$. The generating function in this case
+was found by Euler, and is
+\[
+  f(x) = 1 + \sum_{1}^{\infty} p(n) x^{n}
+    = \frac{1}{(1 - x) (1 - x^{2}) (1 - x^{3}) \dots}.
+\]
+
+I do not wish to discuss this problem in any detail
+now, but the form of the generating function calls for
+one or two general remarks. In the trivial problem the
+generating function was \emph{rational}, with a finite number of
+poles all situated upon the unit circle. Here also we are
+led to a power series, or infinite product, convergent inside
+the unit circle; but there the resemblance ends. This
+function will be recognized by any one familiar with the
+theory of elliptic functions; it is an elliptic modular
+function; and, like all such functions, it has the unit circle
+as a continuous line of singularities and does not exist at
+all outside. It is easy to imagine the immensely increased
+difficulties of any analytic solution of the problem.
+
+It was conjectured by a very brilliant Hungarian
+mathematician, Mr.~G. Pólya, five or six years ago, that
+\emph{any} function represented by a power series whose
+coefficients are \emph{integers}, and which is convergent inside
+the unit circle, must behave, in this respect, like one or
+other of the two generating functions which we have
+considered. Either such a function is a rational function,
+that is to say, completely elementary; or else the unit
+circle is a line of essential singularities. I believe that a
+proof of this theorem has now been found by Mr.~F. Carlson
+of Upsala, and is to be published shortly in the \textit{Mathematische
+Zeitschrift}. It is difficult for me to give reasoned
+praise to a memoir which I have not seen, but I can
+recommend the theorem to your attention with confidence
+as one of the most beautiful of recent years.
+
+The problem of partitions is one to which, in collaboration
+with the Indian mathematician, Mr.~S. Ramanujan, I have
+%% -----File: 016.png---
+myself devoted a great deal of work. The principal result
+of our work has been the discovery of an approximate
+formula for~$p(n)$ in which the leading term is
+\[
+\frac{1}{2\pi\sqrt{2}}
+\frac{d}{dn}
+\frac{e^{\frac{2\pi}{\sqrt{6}}\sqrt{n - \smash[b]{\frac{1}{24}}}}}
+     {\sqrt{n - \smash[b]{\frac{1}{24}}}},
+\]
+and which enables us to approximate to~$p(n)$ with an
+accuracy which is almost uncanny. We are able, for
+example, by using $8$~terms of our formula, to calculate
+$p(200)$, a number of $13$~figures, with an error of~$.004$.
+I have set out the details of the calculation in \TableRef{Table~I}{I.}\@.
+\begin{table}[hbt!]
+\Table{I.}
+\[
+\begin{array}{r}
+\ColHead{p(200)}\\
+3,972,998,993,185.896\\
+36,282.978\\
+\Tally[-]{87.555}\\
+\Tally{5.147}\\
+\Tally{1.424}\\
+\Tally{0.071}\\
+\Tally{0.000}\\
+\Tally{0.043}\\
+\hline
+3,972,999,029,388.004\\
+\hline
+\end{array}
+\]
+\end{table}
+The value of~$p(200)$ was subsequently verified by Major
+MacMahon, by a direct computation which occupied over
+a month.
+
+The formulae connected with this problem are very
+elaborate, and except on the purely numerical side, where
+the results of the theory are compared with those of computation,
+it is not very well suited for a hasty exposition;
+and I therefore pass on at once to the principal
+object of my lecture, the very famous problem known,
+after a Cambridge professor of the eighteenth century, as
+\emph{Waring's Problem}.
+%% -----File: 017.png---
+
+We suppose now that every~$\alpha$ is a perfect $k$-th~power
+$m^{k}$, $k$~being fixed in each case of the problem which we
+consider; $m$~may be of either sign if $k$~is even, but must
+be positive if $k$~is odd. In either case we allow $m$ to be
+zero. Repetitions are permitted, as in our previous problems;
+but it is more convenient now to take account of the order
+of the~$\alpha$'s; and $s$, which was formerly unrestricted, is now
+fixed in each case of the problem, like~$k$. The problem is
+therefore that of determining the number of representations
+of a number~$n$ as the sum of $s$~positive $k$-th~powers. Thus
+Henry Smith's problem, the problem of five squares, is the
+particular case of Waring's problem in which $k$~is~$2$ and
+$s$~is~$5$. The problem has a long history, which centres
+round this simplest case of squares; a history which began,
+I suppose, with the right-angled triangles of Pythagoras,
+and has been continued by a long succession of mathematicians,
+including Fermat, Euler, Lagrange, and Jacobi, down
+to the present day. I will begin by a summary of what
+is known in the simplest case, where the solution is
+practically complete.
+
+A number~$n$ is the sum of \textbf{two} squares if and only if
+it is of the form
+\[
+n = M^{2}P,
+\]
+where $P$~is a product of primes, all different and all of the
+form~$4k + 1$. In particular, a prime number of the form
+$4k + 1$ can be expressed as the sum of two squares, and
+substantially in only one way. Thus $5 = 1^{2} + 2^{2}$, and there
+is no other solution except the solutions $(±1)^{2} + (±2)^{2}$,
+$(±2)^{2} + (±1)^{2}$, which are not essentially different, although
+it is convenient to count them as distinct. The number of
+numbers less than~$x$, and expressible as the sum of two
+squares, is approximately
+\[
+  \frac{Cx}{\sqrt{\log x}},
+\]
+%% -----File: 018.png---
+where $C$~is a certain constant. The last result was proved
+by Landau in~1908; all the rest belong to the classical
+theory.
+
+A number is the sum of \textbf{three} squares unless it is of
+the form
+\[
+4^{\alpha}(8k + 7),
+\]
+when it is not so expressible. \emph{Every} number may be
+expressed by \textbf{four} squares, and \textit{a~fortiori} by five or more.
+It is this last theorem of Lagrange that I would ask you
+particularly to bear in mind.
+
+If $s$, the number of squares, is even and less than~$10$,
+the number of representations may be expressed in a very
+simple form by means of the divisors of~$n$. Thus the
+number of representations by $4$~squares, when $n$~is odd, is
+$8$~times the sum of the divisors of~$n$; when $n$~is even, it
+is $24$~times the sum of the odd divisors; and there are
+similar results for $2$~squares, or~$6$, or~$8$.
+
+When $s$~is $3$,~$5$, or~$7$, the number of representations can
+also be found in a simple form, though one of a very
+different character. Suppose, for example, that $s$~is~$3$. The
+problem is in this case essentially the same as that of
+determining the number of classes of binary arithmetical
+forms of determinant~$-n$; and the solution depends on
+certain finite sums of the form
+\[
+\sum \beta,\quad \sum \gamma,
+\]
+extended over quadratic residues~$\beta$ or non-residues~$\gamma$ of~$n$.
+
+When $s$, whether even or odd, is greater than~$8$, the
+solution is decidedly more difficult, and it is only very
+recently that a uniform method of solution, for which I
+must refer you to some recent memoirs of Mr.~L.~J. Mordell
+and myself, has been discovered. For the moment I wish
+to concentrate your attention on two points: the first, that
+%% -----File: 019.png--- %%moved up one line to avoid breaking emph.
+\emph{an expression by $4$~squares is always possible, while one
+by~$3$ is not}; and the second, that the existence of numbers
+not expressible by $3$~squares is revealed at once by the quite
+trivial observation that no number so expressible can be
+congruent to~$7$ to modulus~$8$.
+
+It is plain, when we proceed to the general case, that
+any number~$n$ can be expressed as a sum of $k$-th~powers;
+we have only to take, for example, the sum of $n$~ones. And,
+when $n$~is given, there is a \emph{minimum} number of $k$-th~powers
+in terms of which $n$~can be expressed; thus
+\[
+23 = 2·2^{3} + 7·1^{3}
+\]
+is the sum of $9$~cubes and of no smaller number. But it is
+not at all plain (and this is the point) that this minimum
+number cannot tend to infinity with~$n$. It does not when
+$k = 2$; for then it cannot exceed~$4$. And Waring's Problem
+(in the restricted sense in which the name has commonly
+been used) is the problem of proving that the minimum
+number is similarly bounded in the general case. It is not
+an easy problem; its difficulty may be judged from the fact
+that it took 127~years to solve.
+
+We may state the problem more formally as follows.
+Let $k$ be given. Then there may or may not exist a
+number~$m$, the same for all values of~$n$, and such that
+$n$~can always be expressed as the sum of~$m$ $k$-th~powers or
+less. If any number~$m$ possesses this property, all larger
+numbers plainly possess it too; and among these numbers
+we may select the \emph{least}. This least number, which will
+plainly depend on~$k$, we call~$g(k)$; thus $g(k)$ is, by definition,
+the least number, if such a number exists, for which
+it is true that
+\begin{quotation}
+\textit{`every number is the sum of~$g(k)$ $k$-th~powers or less'.}
+\end{quotation}
+We have seen already that $g(2)$~exists and has the value~$4$.
+
+In the third edition of his \textit{Meditationes Algebraicae},
+published in Cambridge in~1782, Waring asserted that
+%% -----File: 020.png---
+every number is the sum of not more than $4$~squares, not
+more than $9$~cubes, not more than $19$~fourth powers, \textit{et sic
+deinceps}. A little more precision would perhaps have
+been desirable; but it has generally been held, and I do
+not question that it is true, that what Waring is asserting
+is precisely the existence of~$g(k)$. He implies, moreover,
+that $g(2) = 4$ and $g(3) = 9$; and both of these assertions
+are correct, though in the first he had been anticipated by
+Lagrange. Whether $g(4)$ is or is not equal to~$19$ is not
+known to-day.
+
+Waring advanced no argument of any kind in support
+of his assertion, and it is in the highest degree unlikely
+that he was in possession of any sort of proof. I have no
+desire to detract from the reputation of a man who was
+a very good mathematician if not a great one, and who
+held a very honourable position in a University which not
+even Oxford has persuaded me entirely to forget. But
+there is a tendency to exaggerate the profundity implied
+by the enunciation of a theorem of this particular kind.
+We have seen this even in the case of Fermat, a mathematician
+of a class to which Waring had not the slightest
+pretensions to belong, whose notorious assertion concerning
+`Mersenne's numbers' has been exploded, after the lapse of
+over 250~years, by the calculations of the American computer
+Mr.~Powers. No very laborious computations would be
+necessary to lead Waring to a highly plausible speculation,
+which is all I take his contribution to the theory to be;
+and in the Theory of Numbers it is singularly easy to
+speculate, though often terribly difficult to prove; and it
+is only proof that counts.
+
+The next advance towards the solution of the problem
+was made by Liouville, who established the existence of~$g(4)$.
+Liouville's proof, which was first published in~1859,
+is quite simple and, as the simplest example of an important
+%% -----File: 021.png---
+type of argument, is worth reproducing here. It may be
+verified immediately that
+\begin{multline*}
+6X^{2} = 6(x^{2} + y^{2} + z^{2} + t^{2})^{2}\\
+\begin{aligned}
+&= (x + y)^{4} + (x - y)^{4} + (z + t)^{4} + (z - t)^{4}\\
+&+ (x + z)^{4} + (x - z)^{4} + (t + y)^{4} + (t - y)^{4}\\
+&+ (x + t)^{4} + (x - t)^{4} + (y + z)^{4} + (y - z)^{4};
+\end{aligned}
+\end{multline*}
+and since, by Lagrange's theorem, any number~$X$ is the
+sum of $4$~squares, it follows that any number of the form~$6X^{2}$
+is the sum of $12$~biquadrates. Hence any number of
+the form $6(X^{2} + Y^{2} + Z^{2} + T^{2})$ or, what is the same thing,
+any number of the form~$6m$, is the sum of $48$~biquadrates.
+But \emph{any} number~$n$ is of the form~$6m + r$, where $r$~is
+$0$,~$1$, $2$, $3$, $4$, or~$5$. And therefore $n$~is, at worst, the sum
+of $53$~biquadrates. That is to say, $g(4)$~exists, and does
+not exceed~$53$. Subsequent investigators, refining upon this
+argument, have been able to reduce this number to~$37$; the
+final proof that $g(4) \leq 37$, the most that is known at present,
+was given by Wieferich in~1909. The number
+\[
+79 = 4·2^{4} + 15·1^{4}
+\]
+needs $19$~biquadrates, and no number is known which needs
+more. There is therefore still a wide margin of uncertainty
+as to the actual value of~$g(4)$.
+
+The case of cubes is a little more difficult, and the
+existence of~$g(3)$ was not established until 1895, when
+Maillet proved that $g(3) \leq 17$. The proof then given by
+Maillet rests upon the identity
+\begin{multline*}
+6x(x^{2} + y^{2} + z^{2} + t^{2})\\
+= (x + y)^{3} + (x - y)^{3} + (x + z)^{3} + (x - z)^{3} + (x + t)^{3} + (x - t)^{3},
+\end{multline*}
+and the known results concerning the expression of a
+number by $3$~squares. It has not the striking simplicity
+of Liouville's proof; but it has enabled successive investigators
+to reduce the number of cubes, until finally Wieferich,
+%% -----File: 022.png---
+in~1909, proved that $g(3) \leq 9$. As $23$~and~$239$ require
+$9$~cubes, the value of~$g(3)$ is in fact exactly~$9$. It is only
+for $k = 2$ and $k = 3$ that the actual value of~$g(k)$ has
+been determined. But similar existence proofs were found,
+and upper bounds for~$g(k)$ determined, by various writers,
+in the cases $k = 5$,~$6$, $7$, $8$, and~$10$.
+
+Before leaving the problem of the cubes I must call your
+attention to another very beautiful theorem of a slightly
+different character. The numbers $23$~and~$239$ require
+$9$~cubes, and it appears, from the results of a survey of
+all numbers up to~$40,000$, that no other number requires so
+many. It is true that this has not actually been proved;
+but it \emph{has} been proved (and this is of course the essential
+point) that the number of numbers which require as many
+cubes as~$9$ is \emph{finite}.
+
+This singularly beautiful theorem, which is due to my
+friend Professor Landau of Göttingen, and is to me as
+fascinating as anything in the theory, also dates from
+1909, a year which stands out for many reasons in the
+history of the problem. It is of exceptional interest not
+only in itself but also on account of the method by which
+it was proved, which utilizes some of the deepest results in
+the modern theory of the asymptotic distribution of primes,
+and made it, until very recently, the only theorem of its
+kind erected upon a genuinely transcendental foundation.
+To me it has a personal interest also, as being the only
+theorem of the kind which, up to the present, defeats
+the new analytic method by which Mr.~Littlewood and
+I have recently studied the problem.
+
+Landau's theorem suggests the introduction of another
+function of~$k$, which I will call~$G(k)$, of the same general
+character as~$g(k)$, but I think probably more fundamental.
+This number~$G(k)$ is defined as being the least number for
+which it is true that
+%% -----File: 023.png---
+\begin{quotation}
+\textit{`every \DPtypo{member}{number} \textsc{from a certain point onwards} is the
+sum of~$G(k)$ $k$-th~powers or less.'}
+\end{quotation}
+It is obvious that the existence of~$g(k)$ involves that of~$G(k)$,
+and that $G(k) \leq g(k)$. When $k = 2$, both numbers
+are~$4$; but $G(3) \leq 8$, by Landau's theorem, while $g(3) = 9$;
+and doubtless $G(k) < g(k)$ in general. It is important also
+to observe that, conversely, the existence of~$G(k)$ involves
+that of~$g(k)$. For, if $G(k)$~exists, all numbers beyond a
+certain limit~$\gamma$ are sums of~$G(k)$ $k$-th~powers or less. But
+all numbers less than~$\gamma$ are sums of $\gamma$~ones or less, and therefore
+$g(k)$ certainly cannot exceed the greater of $G(k)$~and~$\gamma$.
+
+I said that $G(k)$ seemed to me the more fundamental of
+these numbers, and it is easy to see why. Let us assume
+(as is no doubt true) that the only numbers which require
+$9$~cubes for their expression are $23$~and~$239$. This is a very
+curious fact which should be interesting to any genuine
+arithmetician; for it ought to be true of an arithmetician
+that, as has been said of Mr.~Ramanujan, and in his case
+at any rate with absolute truth, that `every positive integer
+is one of his personal friends'. But it would be absurd to
+pretend that it is one of the profounder truths of higher
+arithmetic: it is nothing more than an entertaining arithmetical
+fluke. It is Landau's~$8$ and not Wieferich's~$9$ that
+is the profoundly interesting number.
+
+The real value of~$G(3)$ is still unknown. It cannot be
+less than~$4$; for every number is congruent to~$0$, or~$1$, or~$-1$
+to modulus~$3$, and it is an elementary deduction that
+every cube is congruent to~$0$, or~$1$, or~$-1$ to modulus~$9$.
+From this it follows that the sum of three cubes cannot be
+of the form $9m + 4$~or $9m + 5$: for such numbers at least
+$4$~cubes are necessary, so that $G(3) \geq 4$. But whether
+$G(3)$~is $4$,~$5$, $6$, $7$, or~$8$ is one of the deepest mysteries
+of arithmetic.
+
+It is worth while to glance at the evidence of computation.
+%% -----File: 024.png---
+Dase, at the instance of Jacobi, tabulated the minimum
+number of cubes for values of~$n$ from~$1$ to~$12,000$, and Daublensky
+von~Sterneck has extended the table to~$40,000$.
+Some of the results are shown in \TableRef{Table~II}{II.}\@.
+\begin{table}[hbt!]
+\Table{II.}
+\[
+\begin{array}{rrrrrrrrrc}
+& \ColHead{1}& \ColHead{2} & \ColHead{3} & \ColHead{4} & \ColHead{5} & \ColHead{6} & \ColHead{7} & \ColHead{8} & \ColHead{9} \\
+    1\EnDash\phantom{0}1000& 10& 41& 122& 242& 293& 202&      73&       15&        2\\
+ 1000\EnDash\phantom{0}2000&  2& 27& 113& 283& 358& 194&      23&  \EmDash&  \EmDash\\
+ 9000\EnDash10000&  1& 17& 121& 377& 401&  83& \EmDash&  \EmDash&  \EmDash\\
+19000\EnDash20000&  1& 12& 100& 400& 426&  61& \EmDash&  \EmDash&  \EmDash\\
+29000\EnDash30000&  1& 11& 105& 448& 388&  47& \EmDash&  \EmDash&  \EmDash\\
+39000\EnDash40000&  1& 13& 117& 457& 384&  28& \EmDash&  \EmDash&  \EmDash
+\end{array}
+\]
+\end{table}
+In each row I have shown a typical thousand numbers,
+classified according to the minimum number of cubes by
+which they can be expressed. There are $15$~numbers only
+for which $8$~are needed, the largest being~$454$. There are
+$121$ for which $7$~are needed, the two largest being $5818$ and
+$8042$; the distribution of these $121$~numbers in the first
+$9$~thousands is
+\[
+  73,\thickspace 23,\thickspace 7,\thickspace 6,\thickspace 7,\thickspace 4,\thickspace 0,\thickspace 0,\thickspace 1.
+\]
+If empirical evidence means anything, it seems clear that
+$G(3) \leq 6$. I am sure that Professor Townsend and Professor
+Lindemann have made countless generalizations on evidence
+far less substantial.
+
+It is also clear that, throughout von~Sterneck's tables,
+there is a fairly steady, though latterly very slow, decrease
+in the proportion of numbers for which even $6$~cubes are
+required; but that the table is not sufficiently extensive to
+give any very decisive indication as to whether these numbers
+disappear or not. It seemed to me this was a case in
+which further evidence would be worth having. To calculate
+a \emph{systematic} table on the scale required would be a work
+of years. It is possible, however, to obtain some indication
+%% -----File: 025.png---
+of the probable truth, without any superhuman patience,
+by exploring a selected stratum of much larger numbers.
+Dr.~Ruckle of Göttingen recently undertook this task at
+my request, and I am glad to be able to tell you his
+results. He found, for the $2,000$~numbers immediately
+below $1,000,000$, the following distribution.
+\[
+\begin{array}{lccccccc}
+ & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+998000\EnDash  999000 & 0 & 1 & 98 & 640 & 262 & 1 & 0\\%[**TN: there is an error in this row, as it adds up to 1002 not 1000]
+999000\EnDash 1000000 & 1 & 1 & 94 & 614 & 289 & 1 & 0\\
+\end{array}
+\]
+You will observe that the $6$-cube numbers have all but
+disappeared, and that there is a quite marked turnover
+from $5$ to~$4$. Conjecture in such a matter is extremely
+rash, but I am on the whole disposed to predict with some
+confidence that $G(3) \leq 5$. If I were asked to choose between
+$5$~and~$4$, all I could say would be this. That $G(3)$ should
+be~$4$ would harmonize admirably, so far as we can see
+at present, with the general trend of Mr.~Littlewood's and
+my researches. But it is plain that, if the $5$-cube numbers
+too do ultimately disappear, it can only be among numbers
+the writing of which would tax the resources of the decimal
+notation; and at present we cannot \emph{prove} even that $G(3) \leq 7$,
+though here success seems not impossible.
+
+With the fourth powers or biquadrates we have been
+very much more successful. I have explained that $g(4)$~lies
+between $19$~and~$37$. As regards~$G(4)$, we have here no
+numerical evidence on the same scale as for cubes. Any
+fourth power is congruent to $0$~or~$1$ to modulus~$16$, and
+from this it follows that no number congruent to~$15$ to
+modulus~$16$ can be the sum of less than~$15$ fourth powers.
+Thus $G(4) \geq 15$; and Kempner, by a slight elaboration of
+this simple argument, has proved that $G(4) \geq 16$. No
+better upper bound was known before than the~$37$ of
+Wieferich, but here Mr.~Littlewood and I have been able
+%% -----File: 026.png---
+to make a very substantial improvement, first to~$33$ and
+finally to~$21$. Thus $G(4)$~lies between $16$~and~$21$, and
+the margin is comparatively small.
+
+I turn now to the general case. In the years up to
+1909, the existence proof was effected, and upper bounds
+for~$g(k)$ determined, for the values of~$k$ from~$2$ to~$8$ inclusive
+and for $k = 10$. These upper bounds are shown
+in the first row of \TableRef{Table~III}{III.}; that for~$10$, which is not
+included, is somewhere in the neighbourhood of~$140,000$.
+\begin{table}[hbt!]
+\Table{III.}
+\[
+\begin{array}{@{}l@{\ }cccrrrr}
+& 2&    3&    4& \ColHead{5}& \ColHead{6}& \ColHead{7}& \ColHead{8}\\
+g(k) \leq&
+  4&    9&   37&   58&   478&   3806&  31353\\
+\DPtypo{G(k)}{g(k)} \geq \bigl[\left(\frac{3}{2}\right)^{k}\bigr] + 2^{k} - 2 =&
+  4&    9&   19&   37&    73&    143&      279\\
+G(k) \leq&
+   4& [8]&   37&   58&   478&   3806&  31353\\
+G(k) \leq (k - 2) 2^{k-1} + 5 =&
+ (5)& (9)&   \mathbf{21}&   \mathbf{53}&   \mathbf{133}&    \mathbf{325}&    \mathbf{773}\\
+G(k) \geq k + 1, 4k&
+   4&   4&   16&    6&     7&      8&     32
+\end{array}
+\]
+\end{table}
+In the second row I have shown the best known lower
+bounds, which are given by the simple general formula
+which stands to the left, in which $\left[\left(\frac{3}{2}\right)^{k}\right]$~denotes the
+integral part of~$\left(\frac{3}{2} \right)^{k}$. It is easily verified, in fact, that
+the number
+\[
+\left(\left[\left(\tfrac{3}{2}\right)^{k}\right] - 1\right) 2^{k} + 2^{k} - 1,
+\]
+which is less than~$3^{k}$, requires the number of $k$-th~powers
+stated.\footnote
+  {This observation was made by Bretschneider in~1853.}
+It will be observed that the first three numbers
+are those which occur in Waring's enunciation.
+
+Waring's problem, as I have defined it---the problem,
+that is to say, of finding a general existence proof
+for~$g(k)$, and \textit{a~fortiori} for~$G(k)$---was ultimately solved
+by Hilbert, once more in~1909. I wish that I had time
+to give a proper account of his justly famous memoir,
+which raised the whole discussion at once on to an
+%% -----File: 027.png---
+altogether higher level. As it is, I must confine myself
+to one or two extremely inadequate remarks. The
+proof falls into two parts. The first part is what I may
+call semi-transcendental. It is not fully transcendental in
+the sense in which, for example, the classical proofs in the
+theory of the distribution of primes are transcendental, for
+it does not make use of the machinery of the theory of
+analytic functions of a complex variable; but it uses the
+methods of the integral calculus, and is therefore not
+fully elementary. Hilbert set out with what would appear
+at first sight to be the singularly ill-adapted weapon of
+a volume integral in space of $25$~dimensions, a number
+which he was afterwards able to reduce to~$5$. The formula
+which he ultimately used is
+\begin{multline*}
+(x_{1}^{2} + x_{2}^{2} + x_{3}^{2} + x_{4}^{2} + x_{5}^{2})^{k}\\
+=  C\iiiiint (x_{1}t_{1} + x_{2}t_{2} + x_{3}t_{3} + x_{4}t_{4} +
+             x_{5}t_{5})^{2k}\, dt_{1} \dots dt_{5},
+\end{multline*}
+where $C$~is a certain constant, viz.\
+\[
+\frac{(2k + 1)(2k + 3)(2k + 5)}{8\pi^{2}},
+\]
+and the integration is effected over the interior of the
+hypersphere
+\[
+t_{1}^{2} + t_{2}^{2} + t_{3}^{2} + t_{4}^{2} + t_{5}^{2} = 1.
+\]
+
+Starting from this formula he was able, by an exceedingly
+ingenious process based upon the definition of a
+definite integral as the limit of a finite sum, to prove
+the existence in the general case of algebraical identities
+analogous to that used by Liouville and his followers
+when $k$~is~$4$. It should be observed that Hilbert's
+proof is essentially an \emph{existence proof}; his method is
+not effective for the actual determination of these identities
+%% -----File: 028.png---
+even in the simplest cases. The identities which are known
+for special values of~$k$ have been obtained by common
+algebra, and are, after the first few values of~$k$, excessively
+complicated. The simplest known identity for $k = 10$, for
+instance, is
+\begin{multline*}
+22680(x_{1}^{2} + x_{2}^{2} + x_{3}^{2} + x_{4}^{2})^{5}\\
+\begin{aligned}
+&= 9\sum^{(8)} (x_{1} ± x_{2} ± x_{3} ± x_{4})^{10}
+  + \sum^{(48)} (2x_{1} ± x_{2} ± x_{3})^{10}\\
+&+ 180\sum^{(12)} (x_{1} ± x_{2})^{10}
+  + 9\sum^{(4)} (2x_{1})^{10},
+\end{aligned}
+\end{multline*}
+where the figures in brackets show the number of terms
+under the signs of summation. However, the identities
+exist; and it should be clear to you, after our discussion of
+the case $k = 4$, that they enable us at once to obtain a
+proof in succession for $k = 2$,~$4$, $8$, $16$,~$\dots$ and generally
+whenever $k$~is a power of~$2$. This concludes the first and
+most characteristic part of Hilbert's argument. The second
+part, in which the conclusion is extended to every value of~$k$,
+is purely algebraical.
+
+Hilbert's work has been reconsidered and simplified by
+a number of writers, most notably by Dr.~Stridsberg of
+Stockholm, and the ultimate result of their work has been
+to eliminate the transcendental elements from the proof
+entirely. The proof, as they have left it, is fully elementary;
+it does not involve any reference to integrals, or to
+any kind of limiting process, but depends simply on an
+ingenious system of equations derived by the processes of
+finite algebra. It remains a pure existence proof, and
+throws no light on the value of~$g(k)$.
+
+It would hardly be possible for me to exaggerate the
+admiration which I feel for the solution of this historic
+problem of which I have been compelled to give so bald
+%% -----File: 029.png---
+and summary a description. Within the limits which it
+has set for itself, it is absolutely and triumphantly successful,
+and it stands with the work of Hadamard and de~la
+Vallée-Poussin, in the theory of primes, as one of the landmarks
+in the modern history of the theory of numbers.
+But there is an enormous amount which remains to be
+done, and it would seem that, if we are to interpret
+Waring's problem in the widest possible sense, if we are to
+get into real contact with the actual values of our numbers
+$g(k)$~and~$G(k)$, still more if we are to attack all the obvious
+problems connected with the number of representations,
+then essentially different and inherently more powerful
+methods are required. There is one armoury only in which
+such more powerful weapons can be found, that of the
+modern theory of functions. In short we must learn how
+to apply Cauchy's Theorem to the problem, and that is
+what Mr.~Littlewood and I have set out to do.
+
+The first step is fairly obvious. The formulae are
+slightly simpler when $k$~is \emph{even}. The number of representations
+of~$n$ as the sum of~$s$ $k$\DPtypo{}{-}th~powers, which we may
+denote in general by
+\[
+r_{k, s}(n),
+\]
+is then the coefficient of~$x^{n}$ in the generating function
+\[
+1 + \sum_{1}^{\infty} r_{k, s}(n)x^{n} = \left(f(x)\right)^{s},
+\]
+where
+\[
+f(x) = 1 + 2x^{1^{k}} + 2x^{2^{k}} + 2x^{3^{k}} + \dots\DPtypo{}{.}
+\]
+This formula involves certain conventions as to the order
+and sign of the numbers which occur in the representations
+which are to be reckoned as distinct; but the complications
+so introduced are trivial and I need not dwell on them.
+The series is convergent when $|x| < 1$, and, by Cauchy's
+%% -----File: 030.png---
+Theorem, we have
+\[
+r_{k,s}(n) = \frac{1}{2\pi i} \int \frac{\left(f(x)\right)^{s}}{x^{n+1}}\, dx,
+\]
+the path of integration being a circle whose centre is at
+the origin and whose radius is less than unity.
+
+All this is simple enough; but the further study of the
+integral is very intricate and difficult, and I cannot attempt
+to do more than to give a rough idea of the obstacles that
+have to be surmounted. Let us contrast the integral for a
+moment with that which would stand in its place in the
+`trivial' problem to which I referred early in my lecture.
+There the subject of integration would be a \emph{rational} function,
+with a finite number of poles all situated on the unit
+circle. We could deform the contour into one which lies
+wholly at a considerable distance from the origin and in
+which, owing to the factor~$x^{n+1}$ in the denominator, every
+element is very small when $n$~is large. We should have,
+of course, to introduce corrections corresponding to the
+residues at the poles; and it is just these corrections which
+would give the dominant terms of an approximate formula
+by means of which our coefficients could be studied. In
+the present case we have no such simple recourse; for
+every point of the unit circle is a singularity of an exceedingly
+complicated kind, and the circle as a whole is a
+barrier across which it is impossible to deform the contour.
+It is of course for this reason that no successful application
+of the method has been made before.
+
+Our fundamental idea for overcoming the difficulty is
+as follows. Among the continuous mass of singularities
+which covers up the circle, it is possible to pick out a class
+which to a certain extent dominates the rest. These special
+singularities are those associated with the \emph{rational} points
+of the circle, that is to say, the points
+\[
+x = e^{2p\pi i/q},
+\]
+%% -----File: 031.png---
+where $p/q$~is a rational fraction in its lowest terms. This
+class of points is indeed an \emph{infinite} class; but the infinity
+is, in Cantor's phrase, only an \emph{enumerable} infinity; and
+the points can therefore be arranged in a simply infinite
+series, on the model of the series
+\[
+\tfrac{0}{1},\thickspace \tfrac{1}{2},\thickspace \tfrac{1}{3},\thickspace \tfrac{2}{3},\thickspace \tfrac{1}{4},\thickspace
+\tfrac{3}{4},\thickspace \tfrac{1}{5},\thickspace \tfrac{2}{5},\thickspace \tfrac{3}{5},\thickspace \tfrac{4}{5},\thickspace
+\tfrac{1}{6},\thickspace \tfrac{5}{6},\thickspace \tfrac{1}{7},\thickspace \dots.
+\]
+In the neighbourhood of these points the behaviour of the
+function is\DPtypo{,}{} sufficiently complex indeed, but simpler than
+elsewhere. The function has, to put the matter in a rough
+and popular way, a general tendency to become large in
+the neighbourhood of the unit circle, but this tendency is
+most pronounced near these particular points. They are
+not only the \emph{simplest} but also the \emph{heaviest} singularities;
+their weight is greatest when the denominator~$q$ is smallest,
+decreases as $q$~increases, and (as a physicist would say)
+becomes infinitely small when $q$~is infinitely large. There
+is, therefore, at any rate, the hope that we may be able to
+isolate the contributions of each of these selected points,
+and obtain, by adding them together, a series which may
+give a genuine approximation to our coefficient.
+
+I owe to Professor Harald Bohr of Copenhagen a
+picturesque illustration which may help to elucidate the
+general nature of our argument. Imagine the unit circle
+as a thin circular rail, to which are attached an infinite
+number of small lights of varying intensity, each illuminating
+a certain angle immediately in front of it. The
+brightest light is at $x = 1$, corresponding to $p = 0$, $q = 1$;
+the next brightest at $x = -1$, corresponding to $p = 1$,
+$q = 2$; the next at $x = e^{2\pi i/3}$ and $e^{4\pi i/3}$, and so on. We
+have to arrange the inner circle, the circle of integration,
+in the position of maximum illumination. If it is too far
+away the light will not reach it; if too near, the arcs
+which fall within the angles of illumination will be too
+%% -----File: 032.png---
+narrow, and the light will not cover it completely. Is it
+possible to place it where it will receive a satisfactorily
+uniform illumination?
+
+The answer is that this is \emph{only} possible when $k$~is~$2$.
+Our functions are then elliptic functions; the lights are the
+formulae of the theory of linear transformation; and we
+can find a position of the inner circle in which it falls
+entirely under their rays. We are thus led to a solution of
+the problem of the squares which is in all essential respects
+complete. But when $k$~exceeds~$2$ the result is less satisfactory.
+The angle of the lights is then too narrow; the
+beams which they emit, instead of spreading out with
+reasonable regularity, are shaped like torpedoes or cigars;
+however we move our circle a part remains in darkness.
+It would seem that this difficulty, which held up our
+researches for something like two years, is the really
+characteristic difficulty of the general problem. It cannot
+be solved until we have found some other source of light.
+
+It was only after the most prolonged and painful efforts
+that we were able to discover such another source. It is
+possible not only to hang lights upon the rail, but also, to
+a certain extent, to cause the rail itself to glow. The
+illumination which can be induced in this manner is irritatingly
+faint, and it is for this reason that our results are
+not yet all that we desire; but it is enough to make the
+dark places dimly visible and to enable us to prove a great
+deal more than has been proved before.
+
+The actual results which we obtain are these. We find
+that there is a certain series, which we call the \emph{singular
+series}, which is plainly the key to the solution. This
+series is
+\[
+\S = \sum \left(\frac{S_{p,q}}{q}\right)^{s} e^{2np\pi i/q},
+\]
+%% -----File: 033.png---
+where
+\[
+S_{p,q} = \sum_{h=0}^{q-1} e^{2h^{k}p\pi i/q}
+\]
+---a sum which reduces, when $k = 2$, to one of what are
+known as `Gauss's sums'---and the summation extends,
+first to all values of $p$ less than and prime to~$q$, and
+secondly to all positive integral values of~$q$. The genesis
+of the series is this. We associate with the rational point
+$x = e^{2p\pi i/q}$ an auxiliary power series
+\[
+f_{p,q}(x)= \sum_{n} c_{p,q,n}x^{n},
+\]
+which (\textit{a})~is as simple and natural as we can make it, and
+(\textit{b})~behaves perfectly regularly at all points of the unit circle
+except at the one point with which we are particularly concerned.
+We then add together all these auxiliary functions,
+and endeavour to approximate to the coefficient of our original
+series by summing the auxiliary coefficients over all values
+of $p$~and~$q$. The process is, at bottom, one of `decomposition
+into simple elements', applied in an unusual way.
+
+Our final formula for the number of representations is
+\[
+r_{k,s}(n) =
+  \frac{\left\{2\Gamma\Bigl(1 + \dfrac{1}{k}\Bigr)\right\}^{s}}
+       {\Gamma\Bigl(1 + \dfrac{s}{k}\Bigr)}
+        n^{\frac{s}{k}-1} \S + O(n^{\sigma}),
+\]
+the second term denoting an error less than a constant
+multiple of~$n^{\sigma}$, and $\sigma$~being a number which is less than
+$\dfrac{s}{k} - 1$ at any rate for sufficiently large values of~$s$. The
+second term is then of lower order than the first. Further,
+the first term is real, and it may be shown, if $s$~surpasses
+a certain limit, to be \emph{positive}. If both these conditions
+are satisfied, and $n$~is sufficiently large, then $r_{k,s}(n)$
+%% -----File: 034.png---
+cannot be zero, and representations of~$n$ by $s$ $k$\DPtypo{}{-}th~powers
+certainly exist. The way is thus open to a proof of the
+existence of~$G(k)$; if $G(k)$~exists, so also does~$g(k)$, and
+Waring's problem is solved.
+
+The structure of the dominant term in our general
+formula is best realized by considering some special cases.
+In \TableRef{Table~IV}{IV.} I have written out the leading terms of~$\S$,
+\begin{table}[hbt!]
+\Table{IV.}
+\[
+\begin{array}{@{}l}
+\ColHead{k = 2.}\\
+\S = 1 + 0 +
+  \dfrac{2}{3^{\frac{1}{2}s}}
+    \cos\left(\dfrac{2}{3} n\pi - \dfrac{1}{2} s\pi\right) +
+  \dfrac{2^{\frac{1}{2}s+1}}{4^{\frac{1}{2}s}}
+    \cos\left(\dfrac{1}{2}n\pi - \dfrac{1}{4} s\pi\right)\\[3ex]
+  \hspace*{3cm}+ \dfrac{2}{5^{\frac{1}{2} s}}
+        \left\{\cos\dfrac{2}{5} n\pi +
+                 \cos\left(\dfrac{4}{5} n\pi - s\pi\right)\right\} +
+                   0 + \dots.\\[4ex]
+\ColHead{k = 3, s = 7.}\\[1ex]
+\S = 1 + 0.610 \cos \frac{2}{9} n\pi + 0.130 \cos \frac{2}{7} n\pi +
+         0.078 \cos \frac{6}{7} n\pi + \dots.\\[3ex]
+\ColHead{k = 4, s = 33.}\\[1ex]
+\S = 1 + 1.054 \cos (\frac{1}{8} n\pi - \frac{1}{16} \pi) +
+       0.147 \cos (\frac{1}{4} n\pi - \frac{1}{8} \pi) + \dots.\\[3ex]
+\ColHead{k = 4, s = 21.}\\[1ex]
+\S = 1 + 1.331 \cos (\frac{1}{8} n\pi + \frac{11}{16} \pi) +
+           0.379 \cos (\frac{1}{4} n\pi - \frac{5}{8} \pi) + \dots.
+\end{array}
+\]
+\end{table}
+first when $k = 2$ and $s$~is arbitrary, and then for $7$~cubes
+and for $33$~and $21$~biquadrates. There are certain
+characteristics common to all these series. The terms
+diminish rapidly; in each case only a very few are of real
+importance: and they are oscillatory, with a period which
+increases as the amplitude of the oscillations decreases.
+The series for the cubes is easily shown to be positive;
+but we cannot deduce that $r_{3,7}(n)$ is positive, and draw
+consequences as to the representation of numbers by $7$~cubes,
+%% -----File: 035.png---
+because in this case we cannot dispose satisfactorily of the
+error term~$O(n^{\sigma})$ in the general formula. In the two
+cases relating to fourth powers which I have chosen, the
+discussion of the series itself is rather more delicate, for
+there is in each of them one term which can be negative
+and greater than~$1$. But the discussion can be brought to
+a satisfactory conclusion, and, as in this case we are able
+to prove that the error term is really of lower order, we
+obtain what we desire. \emph{Every large number is the sum of
+$21$~fourth powers or less}; $G(4) \leq 21$. Further, we have
+obtained a genuine asymptotic formula for the number
+of representations, which can be used for the study of the
+representations of numbers of particular forms. We can
+show, for example, that a large number of the form
+$16n + 10$ can be expressed by $21$~biquadrates in about $200$~times
+more ways than one of the form~$16n + 2$.
+
+If the method of which I have tried to give some general
+idea is compared with those which have previously been
+applied to the problem, it will be found that it has three
+very great advantages. In the first place it is inherently
+very much more powerful. It brings us for the first time
+into relation with the series on which the solution in the
+last resort depends, and tells us, approximately but truly,
+what the number of representations really is. Secondly, it
+gives us numerical results which, as soon as $k$~exceeds~$3$, are
+far in advance of any known before. These numbers
+are those in the fourth row of \TableRef{Table~III}{III.}\@.\footnote
+  {The thick type indicates a new result. The (5)~and~(9) in round
+  brackets are inferior to results already known. Our method is easily
+  adapted to deal with the case $k = 2$ completely; but it will not at
+  present yield Landau's~$8$, which is therefore enclosed in square
+  brackets.}
+It will be seen
+that these numbers conform to a simple law, and that is
+the third advantage of the method, that it is not a mere
+%% -----File: 036.png---
+existence proof, but gives us a definite upper bound for~$G(k)$
+for all values of~$k$, viz.\
+\[
+G(k) \leq (k - 2) 2^{k-1} + 5.
+\]
+
+In the last row of the table~I have shown all that is known
+about~$G(k)$ on the other side. In all cases $G(k) \geq k + 1$,
+while if $k$~is a power of~$2$ we can say more, namely that
+$G(k) \geq 4k$. A comparison between this row of figures and
+that above it is enough to show the room which remains
+for further research. It is beyond question that our
+numbers are still very much too large; and there is no
+sort of finality about our researches, for which the best
+that we claim is that they embody a method which opens
+the door for more.
+
+I will conclude by one word as to the application of
+our method to another and a still more difficult problem.
+It was asserted by Goldbach in 1742 that \emph{every even number
+is the sum of two odd primes}. Goldbach's assertion
+remains unproved; it has not even been proved that every
+number~$n$ is the sum of $10$~primes, or of~$100$, or of any number
+independent of~$n$. Our method is applicable in principle to
+this problem also. We cannot solve the problem, but we
+can open the first serious attack upon it, and bring it into
+relation with the established prime number theory. The
+most which we can accomplish at present is as follows.
+We have to assume the truth of the notorious Riemann
+hypothesis concerning the zeros of the Zeta-function, and
+indeed in a generalized and extended form. If we do this
+we can prove, not Goldbach's Theorem indeed, but the next
+best theorem of the kind, viz.\ that \emph{every odd number}, at any
+rate from a certain point onwards, \emph{is the sum of three odd
+primes}. It is an imperfect and provisional result, but it is
+the first serious contribution to the solution of the problem.
+%% -----File: 037.png---
+\BackMatter
+\null
+\vfill
+\subsection*{\centering\normalfont{POSTSCRIPT}}
+Srinivasa Ramanujan, F.R.S., Fellow of Trinity
+College, Cambridge, died in India on April~26, 1920,
+aged~32.
+
+An account of his life and mathematical activities
+will be published in Vol.~19 of the \textit{Proceedings of
+the London Mathematical Society}.
+\vfill
+%% -----File: 038.png---
+\newpage
+\null
+\vfill
+\begin{center}
+PRINTED IN ENGLAND \\
+AT THE OXFORD UNIVERSITY PRESS \\
+\vfill
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% GUTENBERG LICENSE %%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\BookMark{0}{PG License.}
+\begin{PGtext}
+End of the Project Gutenberg EBook of Some Famous Problems of the Theory of
+Numbers and in particular Waring's Problem, by G. H. (Godfrey Harold) Hardy
+
+*** END OF THIS PROJECT GUTENBERG EBOOK FAMOUS PROBLEMS OF THEORY OF NUMBERS ***
+
+***** This file should be named 37030-pdf.pdf or 37030-pdf.zip *****
+This and all associated files of various formats will be found in:
+        http://www.gutenberg.org/3/7/0/3/37030/
+
+Produced by Anna Hall, Brenda Lewis and the Online
+Distributed Proofreading Team at http://www.pgdp.net (This
+file was produced from images generously made available
+by The Internet Archive/American Libraries.)
+
+
+Updated editions will replace the previous one--the old editions
+will be renamed.
+
+Creating the works from public domain print editions means that no
+one owns a United States copyright in these works, so the Foundation
+(and you!) can copy and distribute it in the United States without
+permission and without paying copyright royalties.  Special rules,
+set forth in the General Terms of Use part of this license, apply to
+copying and distributing Project Gutenberg-tm electronic works to
+protect the PROJECT GUTENBERG-tm concept and trademark.  Project
+Gutenberg is a registered trademark, and may not be used if you
+charge for the eBooks, unless you receive specific permission.  If you
+do not charge anything for copies of this eBook, complying with the
+rules is very easy.  You may use this eBook for nearly any purpose
+such as creation of derivative works, reports, performances and
+research.  They may be modified and printed and given away--you may do
+practically ANYTHING with public domain eBooks.  Redistribution is
+subject to the trademark license, especially commercial
+redistribution.
+
+
+
+*** START: FULL LICENSE ***
+
+THE FULL PROJECT GUTENBERG LICENSE
+PLEASE READ THIS BEFORE YOU DISTRIBUTE OR USE THIS WORK
+
+To protect the Project Gutenberg-tm mission of promoting the free
+distribution of electronic works, by using or distributing this work
+(or any other work associated in any way with the phrase "Project
+Gutenberg"), you agree to comply with all the terms of the Full Project
+Gutenberg-tm License (available with this file or online at
+http://gutenberg.net/license).
+
+
+Section 1.  General Terms of Use and Redistributing Project Gutenberg-tm
+electronic works
+
+1.A.  By reading or using any part of this Project Gutenberg-tm
+electronic work, you indicate that you have read, understand, agree to
+and accept all the terms of this license and intellectual property
+(trademark/copyright) agreement.  If you do not agree to abide by all
+the terms of this agreement, you must cease using and return or destroy
+all copies of Project Gutenberg-tm electronic works in your possession.
+If you paid a fee for obtaining a copy of or access to a Project
+Gutenberg-tm electronic work and you do not agree to be bound by the
+terms of this agreement, you may obtain a refund from the person or
+entity to whom you paid the fee as set forth in paragraph 1.E.8.
+
+1.B.  "Project Gutenberg" is a registered trademark.  It may only be
+used on or associated in any way with an electronic work by people who
+agree to be bound by the terms of this agreement.  There are a few
+things that you can do with most Project Gutenberg-tm electronic works
+even without complying with the full terms of this agreement.  See
+paragraph 1.C below.  There are a lot of things you can do with Project
+Gutenberg-tm electronic works if you follow the terms of this agreement
+and help preserve free future access to Project Gutenberg-tm electronic
+works.  See paragraph 1.E below.
+
+1.C.  The Project Gutenberg Literary Archive Foundation ("the Foundation"
+or PGLAF), owns a compilation copyright in the collection of Project
+Gutenberg-tm electronic works.  Nearly all the individual works in the
+collection are in the public domain in the United States.  If an
+individual work is in the public domain in the United States and you are
+located in the United States, we do not claim a right to prevent you from
+copying, distributing, performing, displaying or creating derivative
+works based on the work as long as all references to Project Gutenberg
+are removed.  Of course, we hope that you will support the Project
+Gutenberg-tm mission of promoting free access to electronic works by
+freely sharing Project Gutenberg-tm works in compliance with the terms of
+this agreement for keeping the Project Gutenberg-tm name associated with
+the work.  You can easily comply with the terms of this agreement by
+keeping this work in the same format with its attached full Project
+Gutenberg-tm License when you share it without charge with others.
+
+1.D.  The copyright laws of the place where you are located also govern
+what you can do with this work.  Copyright laws in most countries are in
+a constant state of change.  If you are outside the United States, check
+the laws of your country in addition to the terms of this agreement
+before downloading, copying, displaying, performing, distributing or
+creating derivative works based on this work or any other Project
+Gutenberg-tm work.  The Foundation makes no representations concerning
+the copyright status of any work in any country outside the United
+States.
+
+1.E.  Unless you have removed all references to Project Gutenberg:
+
+1.E.1.  The following sentence, with active links to, or other immediate
+access to, the full Project Gutenberg-tm License must appear prominently
+whenever any copy of a Project Gutenberg-tm work (any work on which the
+phrase "Project Gutenberg" appears, or with which the phrase "Project
+Gutenberg" is associated) is accessed, displayed, performed, viewed,
+copied or distributed:
+
+This eBook is for the use of anyone anywhere at no cost and with
+almost no restrictions whatsoever.  You may copy it, give it away or
+re-use it under the terms of the Project Gutenberg License included
+with this eBook or online at www.gutenberg.net
+
+1.E.2.  If an individual Project Gutenberg-tm electronic work is derived
+from the public domain (does not contain a notice indicating that it is
+posted with permission of the copyright holder), the work can be copied
+and distributed to anyone in the United States without paying any fees
+or charges.  If you are redistributing or providing access to a work
+with the phrase "Project Gutenberg" associated with or appearing on the
+work, you must comply either with the requirements of paragraphs 1.E.1
+through 1.E.7 or obtain permission for the use of the work and the
+Project Gutenberg-tm trademark as set forth in paragraphs 1.E.8 or
+1.E.9.
+
+1.E.3.  If an individual Project Gutenberg-tm electronic work is posted
+with the permission of the copyright holder, your use and distribution
+must comply with both paragraphs 1.E.1 through 1.E.7 and any additional
+terms imposed by the copyright holder.  Additional terms will be linked
+to the Project Gutenberg-tm License for all works posted with the
+permission of the copyright holder found at the beginning of this work.
+
+1.E.4.  Do not unlink or detach or remove the full Project Gutenberg-tm
+License terms from this work, or any files containing a part of this
+work or any other work associated with Project Gutenberg-tm.
+
+1.E.5.  Do not copy, display, perform, distribute or redistribute this
+electronic work, or any part of this electronic work, without
+prominently displaying the sentence set forth in paragraph 1.E.1 with
+active links or immediate access to the full terms of the Project
+Gutenberg-tm License.
+
+1.E.6.  You may convert to and distribute this work in any binary,
+compressed, marked up, nonproprietary or proprietary form, including any
+word processing or hypertext form.  However, if you provide access to or
+distribute copies of a Project Gutenberg-tm work in a format other than
+"Plain Vanilla ASCII" or other format used in the official version
+posted on the official Project Gutenberg-tm web site (www.gutenberg.net),
+you must, at no additional cost, fee or expense to the user, provide a
+copy, a means of exporting a copy, or a means of obtaining a copy upon
+request, of the work in its original "Plain Vanilla ASCII" or other
+form.  Any alternate format must include the full Project Gutenberg-tm
+License as specified in paragraph 1.E.1.
+
+1.E.7.  Do not charge a fee for access to, viewing, displaying,
+performing, copying or distributing any Project Gutenberg-tm works
+unless you comply with paragraph 1.E.8 or 1.E.9.
+
+1.E.8.  You may charge a reasonable fee for copies of or providing
+access to or distributing Project Gutenberg-tm electronic works provided
+that
+
+- You pay a royalty fee of 20% of the gross profits you derive from
+     the use of Project Gutenberg-tm works calculated using the method
+     you already use to calculate your applicable taxes.  The fee is
+     owed to the owner of the Project Gutenberg-tm trademark, but he
+     has agreed to donate royalties under this paragraph to the
+     Project Gutenberg Literary Archive Foundation.  Royalty payments
+     must be paid within 60 days following each date on which you
+     prepare (or are legally required to prepare) your periodic tax
+     returns.  Royalty payments should be clearly marked as such and
+     sent to the Project Gutenberg Literary Archive Foundation at the
+     address specified in Section 4, "Information about donations to
+     the Project Gutenberg Literary Archive Foundation."
+
+- You provide a full refund of any money paid by a user who notifies
+     you in writing (or by e-mail) within 30 days of receipt that s/he
+     does not agree to the terms of the full Project Gutenberg-tm
+     License.  You must require such a user to return or
+     destroy all copies of the works possessed in a physical medium
+     and discontinue all use of and all access to other copies of
+     Project Gutenberg-tm works.
+
+- You provide, in accordance with paragraph 1.F.3, a full refund of any
+     money paid for a work or a replacement copy, if a defect in the
+     electronic work is discovered and reported to you within 90 days
+     of receipt of the work.
+
+- You comply with all other terms of this agreement for free
+     distribution of Project Gutenberg-tm works.
+
+1.E.9.  If you wish to charge a fee or distribute a Project Gutenberg-tm
+electronic work or group of works on different terms than are set
+forth in this agreement, you must obtain permission in writing from
+both the Project Gutenberg Literary Archive Foundation and Michael
+Hart, the owner of the Project Gutenberg-tm trademark.  Contact the
+Foundation as set forth in Section 3 below.
+
+1.F.
+
+1.F.1.  Project Gutenberg volunteers and employees expend considerable
+effort to identify, do copyright research on, transcribe and proofread
+public domain works in creating the Project Gutenberg-tm
+collection.  Despite these efforts, Project Gutenberg-tm electronic
+works, and the medium on which they may be stored, may contain
+"Defects," such as, but not limited to, incomplete, inaccurate or
+corrupt data, transcription errors, a copyright or other intellectual
+property infringement, a defective or damaged disk or other medium, a
+computer virus, or computer codes that damage or cannot be read by
+your equipment.
+
+1.F.2.  LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the "Right
+of Replacement or Refund" described in paragraph 1.F.3, the Project
+Gutenberg Literary Archive Foundation, the owner of the Project
+Gutenberg-tm trademark, and any other party distributing a Project
+Gutenberg-tm electronic work under this agreement, disclaim all
+liability to you for damages, costs and expenses, including legal
+fees.  YOU AGREE THAT YOU HAVE NO REMEDIES FOR NEGLIGENCE, STRICT
+LIABILITY, BREACH OF WARRANTY OR BREACH OF CONTRACT EXCEPT THOSE
+PROVIDED IN PARAGRAPH 1.F.3.  YOU AGREE THAT THE FOUNDATION, THE
+TRADEMARK OWNER, AND ANY DISTRIBUTOR UNDER THIS AGREEMENT WILL NOT BE
+LIABLE TO YOU FOR ACTUAL, DIRECT, INDIRECT, CONSEQUENTIAL, PUNITIVE OR
+INCIDENTAL DAMAGES EVEN IF YOU GIVE NOTICE OF THE POSSIBILITY OF SUCH
+DAMAGE.
+
+1.F.3.  LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
+defect in this electronic work within 90 days of receiving it, you can
+receive a refund of the money (if any) you paid for it by sending a
+written explanation to the person you received the work from.  If you
+received the work on a physical medium, you must return the medium with
+your written explanation.  The person or entity that provided you with
+the defective work may elect to provide a replacement copy in lieu of a
+refund.  If you received the work electronically, the person or entity
+providing it to you may choose to give you a second opportunity to
+receive the work electronically in lieu of a refund.  If the second copy
+is also defective, you may demand a refund in writing without further
+opportunities to fix the problem.
+
+1.F.4.  Except for the limited right of replacement or refund set forth
+in paragraph 1.F.3, this work is provided to you 'AS-IS' WITH NO OTHER
+WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+WARRANTIES OF MERCHANTIBILITY OR FITNESS FOR ANY PURPOSE.
+
+1.F.5.  Some states do not allow disclaimers of certain implied
+warranties or the exclusion or limitation of certain types of damages.
+If any disclaimer or limitation set forth in this agreement violates the
+law of the state applicable to this agreement, the agreement shall be
+interpreted to make the maximum disclaimer or limitation permitted by
+the applicable state law.  The invalidity or unenforceability of any
+provision of this agreement shall not void the remaining provisions.
+
+1.F.6.  INDEMNITY - You agree to indemnify and hold the Foundation, the
+trademark owner, any agent or employee of the Foundation, anyone
+providing copies of Project Gutenberg-tm electronic works in accordance
+with this agreement, and any volunteers associated with the production,
+promotion and distribution of Project Gutenberg-tm electronic works,
+harmless from all liability, costs and expenses, including legal fees,
+that arise directly or indirectly from any of the following which you do
+or cause to occur: (a) distribution of this or any Project Gutenberg-tm
+work, (b) alteration, modification, or additions or deletions to any
+Project Gutenberg-tm work, and (c) any Defect you cause.
+
+
+Section  2.  Information about the Mission of Project Gutenberg-tm
+
+Project Gutenberg-tm is synonymous with the free distribution of
+electronic works in formats readable by the widest variety of computers
+including obsolete, old, middle-aged and new computers.  It exists
+because of the efforts of hundreds of volunteers and donations from
+people in all walks of life.
+
+Volunteers and financial support to provide volunteers with the
+assistance they need are critical to reaching Project Gutenberg-tm's
+goals and ensuring that the Project Gutenberg-tm collection will
+remain freely available for generations to come.  In 2001, the Project
+Gutenberg Literary Archive Foundation was created to provide a secure
+and permanent future for Project Gutenberg-tm and future generations.
+To learn more about the Project Gutenberg Literary Archive Foundation
+and how your efforts and donations can help, see Sections 3 and 4
+and the Foundation web page at http://www.pglaf.org.
+
+
+Section 3.  Information about the Project Gutenberg Literary Archive
+Foundation
+
+The Project Gutenberg Literary Archive Foundation is a non profit
+501(c)(3) educational corporation organized under the laws of the
+state of Mississippi and granted tax exempt status by the Internal
+Revenue Service.  The Foundation's EIN or federal tax identification
+number is 64-6221541.  Its 501(c)(3) letter is posted at
+http://pglaf.org/fundraising.  Contributions to the Project Gutenberg
+Literary Archive Foundation are tax deductible to the full extent
+permitted by U.S. federal laws and your state's laws.
+
+The Foundation's principal office is located at 4557 Melan Dr. S.
+Fairbanks, AK, 99712., but its volunteers and employees are scattered
+throughout numerous locations.  Its business office is located at
+809 North 1500 West, Salt Lake City, UT 84116, (801) 596-1887, email
+business@pglaf.org.  Email contact links and up to date contact
+information can be found at the Foundation's web site and official
+page at http://pglaf.org
+
+For additional contact information:
+     Dr. Gregory B. Newby
+     Chief Executive and Director
+     gbnewby@pglaf.org
+
+
+Section 4.  Information about Donations to the Project Gutenberg
+Literary Archive Foundation
+
+Project Gutenberg-tm depends upon and cannot survive without wide
+spread public support and donations to carry out its mission of
+increasing the number of public domain and licensed works that can be
+freely distributed in machine readable form accessible by the widest
+array of equipment including outdated equipment.  Many small donations
+($1 to $5,000) are particularly important to maintaining tax exempt
+status with the IRS.
+
+The Foundation is committed to complying with the laws regulating
+charities and charitable donations in all 50 states of the United
+States.  Compliance requirements are not uniform and it takes a
+considerable effort, much paperwork and many fees to meet and keep up
+with these requirements.  We do not solicit donations in locations
+where we have not received written confirmation of compliance.  To
+SEND DONATIONS or determine the status of compliance for any
+particular state visit http://pglaf.org
+
+While we cannot and do not solicit contributions from states where we
+have not met the solicitation requirements, we know of no prohibition
+against accepting unsolicited donations from donors in such states who
+approach us with offers to donate.
+
+International donations are gratefully accepted, but we cannot make
+any statements concerning tax treatment of donations received from
+outside the United States.  U.S. laws alone swamp our small staff.
+
+Please check the Project Gutenberg Web pages for current donation
+methods and addresses.  Donations are accepted in a number of other
+ways including including checks, online payments and credit card
+donations.  To donate, please visit: http://pglaf.org/donate
+
+
+Section 5.  General Information About Project Gutenberg-tm electronic
+works.
+
+Professor Michael S. Hart is the originator of the Project Gutenberg-tm
+concept of a library of electronic works that could be freely shared
+with anyone.  For thirty years, he produced and distributed Project
+Gutenberg-tm eBooks with only a loose network of volunteer support.
+
+
+Project Gutenberg-tm eBooks are often created from several printed
+editions, all of which are confirmed as Public Domain in the U.S.
+unless a copyright notice is included.  Thus, we do not necessarily
+keep eBooks in compliance with any particular paper edition.
+
+
+Most people start at our Web site which has the main PG search facility:
+
+     http://www.gutenberg.net
+
+This Web site includes information about Project Gutenberg-tm,
+including how to make donations to the Project Gutenberg Literary
+Archive Foundation, how to help produce our new eBooks, and how to
+subscribe to our email newsletter to hear about new eBooks.
+\end{PGtext}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %
+%                                                                         %
+% End of the Project Gutenberg EBook of Some Famous Problems of the Theory of
+% Numbers and in particular Waring's Problem, by G. H. (Godfrey Harold) Hardy
+%                                                                         %
+% *** END OF THIS PROJECT GUTENBERG EBOOK FAMOUS PROBLEMS OF THEORY OF NUMBERS ***
+%                                                                         %
+% ***** This file should be named 37030-t.tex or 37030-t.zip *****        %
+% This and all associated files of various formats will be found in:      %
+%         http://www.gutenberg.org/3/7/0/3/37030/                         %
+%                                                                         %
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %
+
+\end{document}
+###
+@ControlwordArguments = (
+  ['\\BookMark', 1, 0, '', '', 1, 0, '', ''],
+  ['\\Title', 1, 1, '', ''],
+  ['\\Table', 1, 1, 'Table ', ''],
+  ['\\TableRef', 1, 1, '', '', 1, 0, '', ''],
+  ['\\DPtypo', 1, 0, '', '', 1, 1, '', ''],
+  ['\\First', 1, 1, '', '']
+  );
+###
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2010.5.6)  10 AUG 2011 13:26
+entering extended mode
+ %&-line parsing enabled.
+**37030-t.tex
+(./37030-t.tex
+LaTeX2e <2005/12/01>
+Babel <v3.8h> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, arabic, farsi, croatian, ukrainian, russian, bulgarian, czech, slov
+ak, danish, dutch, finnish, basque, french, german, ngerman, ibycus, greek, mon
+ogreek, ancientgreek, hungarian, italian, latin, mongolian, norsk, icelandic, i
+nterlingua, turkish, coptic, romanian, welsh, serbian, slovenian, estonian, esp
+eranto, uppersorbian, indonesian, polish, portuguese, spanish, catalan, galicia
+n, swedish, ukenglish, pinyin, loaded.
+(/usr/share/texmf-texlive/tex/latex/base/book.cls
+Document Class: book 2005/09/16 v1.4f Standard LaTeX document class
+(/usr/share/texmf-texlive/tex/latex/base/bk12.clo
+File: bk12.clo 2005/09/16 v1.4f Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+
+LaTeX Warning: You have requested, on input line 87, version
+               `2007/10/19' of document class book,
+               but only version
+               `2005/09/16 v1.4f Standard LaTeX document class'
+               is available.
+
+(/usr/share/texmf-texlive/tex/latex/base/inputenc.sty
+Package: inputenc 2006/05/05 v1.1b Input encoding file
+\inpenc@prehook=\toks14
+\inpenc@posthook=\toks15
+(/usr/share/texmf-texlive/tex/latex/base/latin1.def
+File: latin1.def 2006/05/05 v1.1b Input encoding file
+))
+
+LaTeX Warning: You have requested, on input line 89, version
+               `2008/03/30' of package inputenc,
+               but only version
+               `2006/05/05 v1.1b Input encoding file'
+               is available.
+
+(/usr/share/texmf-texlive/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+) (/usr/share/texmf-texlive/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2000/07/18 v2.13 AMS math features
+\@mathmargin=\skip43
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-texlive/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks16
+\ex@=\dimen103
+)) (/usr/share/texmf-texlive/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen104
+) (/usr/share/texmf-texlive/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count88
+LaTeX Info: Redefining \frac on input line 211.
+\uproot@=\count89
+\leftroot@=\count90
+LaTeX Info: Redefining \overline on input line 307.
+\classnum@=\count91
+\DOTSCASE@=\count92
+LaTeX Info: Redefining \ldots on input line 379.
+LaTeX Info: Redefining \dots on input line 382.
+LaTeX Info: Redefining \cdots on input line 467.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen105
+LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
+\macc@depth=\count93
+\c@MaxMatrixCols=\count94
+\dotsspace@=\muskip10
+\c@parentequation=\count95
+\dspbrk@lvl=\count96
+\tag@help=\toks17
+\row@=\count97
+\column@=\count98
+\maxfields@=\count99
+\andhelp@=\toks18
+\eqnshift@=\dimen106
+\alignsep@=\dimen107
+\tagshift@=\dimen108
+\tagwidth@=\dimen109
+\totwidth@=\dimen110
+\lineht@=\dimen111
+\@envbody=\toks19
+\multlinegap=\skip44
+\multlinetaggap=\skip45
+\mathdisplay@stack=\toks20
+LaTeX Info: Redefining \[ on input line 2666.
+LaTeX Info: Redefining \] on input line 2667.
+) (/usr/share/texmf-texlive/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2002/01/22 v2.2d
+(/usr/share/texmf-texlive/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2001/10/25 v2.2f
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 132.
+))
+
+LaTeX Warning: You have requested, on input line 94, version
+               `2009/06/22' of package amssymb,
+               but only version
+               `2002/01/22 v2.2d'
+               is available.
+
+(/usr/share/texmf-texlive/tex/latex/base/alltt.sty
+Package: alltt 1997/06/16 v2.0g defines alltt environment
+) (/usr/share/texmf-texlive/tex/latex/caption/caption.sty
+Package: caption 2007/01/07 v3.0k Customising captions (AR)
+(/usr/share/texmf-texlive/tex/latex/caption/caption3.sty
+Package: caption3 2007/01/07 v3.0k caption3 kernel (AR)
+(/usr/share/texmf-texlive/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks21
+)
+\captionmargin=\dimen112
+\captionmarginx=\dimen113
+\captionwidth=\dimen114
+\captionindent=\dimen115
+\captionparindent=\dimen116
+\captionhangindent=\dimen117
+)) (/usr/share/texmf-texlive/tex/latex/tools/array.sty
+Package: array 2005/08/23 v2.4b Tabular extension package (FMi)
+\col@sep=\dimen118
+\extrarowheight=\dimen119
+\NC@list=\toks22
+\extratabsurround=\skip46
+\backup@length=\skip47
+)
+
+LaTeX Warning: You have requested, on input line 99, version
+               `2008/09/09' of package array,
+               but only version
+               `2005/08/23 v2.4b Tabular extension package (FMi)'
+               is available.
+
+(/usr/share/texmf-texlive/tex/latex/fancyhdr/fancyhdr.sty
+\fancy@headwidth=\skip48
+\f@ncyO@elh=\skip49
+\f@ncyO@erh=\skip50
+\f@ncyO@olh=\skip51
+\f@ncyO@orh=\skip52
+\f@ncyO@elf=\skip53
+\f@ncyO@erf=\skip54
+\f@ncyO@olf=\skip55
+\f@ncyO@orf=\skip56
+) (/usr/share/texmf-texlive/tex/latex/geometry/geometry.sty
+Package: geometry 2002/07/08 v3.2 Page Geometry
+\Gm@cnth=\count100
+\Gm@cntv=\count101
+\c@Gm@tempcnt=\count102
+\Gm@bindingoffset=\dimen120
+\Gm@wd@mp=\dimen121
+\Gm@odd@mp=\dimen122
+\Gm@even@mp=\dimen123
+\Gm@dimlist=\toks23
+(/usr/share/texmf-texlive/tex/xelatex/xetexconfig/geometry.cfg))
+
+LaTeX Warning: You have requested, on input line 165, version
+               `2010/09/12' of package geometry,
+               but only version
+               `2002/07/08 v3.2 Page Geometry'
+               is available.
+
+(/usr/share/texmf-texlive/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2007/02/07 v6.75r Hypertext links for LaTeX
+\@linkdim=\dimen124
+\Hy@linkcounter=\count103
+\Hy@pagecounter=\count104
+(/usr/share/texmf-texlive/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2007/02/07 v6.75r Hyperref: PDFDocEncoding definition (HO)
+) (/etc/texmf/tex/latex/config/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+) (/usr/share/texmf-texlive/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2006/08/22 v2.4 Connects package keyval with LaTeX options (
+HO)
+)
+Package hyperref Info: Option `hyperfootnotes' set `false' on input line 2238.
+Package hyperref Info: Option `bookmarks' set `true' on input line 2238.
+Package hyperref Info: Option `linktocpage' set `false' on input line 2238.
+Package hyperref Info: Option `pdfdisplaydoctitle' set `true' on input line 223
+8.
+Package hyperref Info: Option `pdfpagelabels' set `true' on input line 2238.
+Package hyperref Info: Option `bookmarksopen' set `true' on input line 2238.
+Package hyperref Info: Option `colorlinks' set `true' on input line 2238.
+Package hyperref Info: Hyper figures OFF on input line 2288.
+Package hyperref Info: Link nesting OFF on input line 2293.
+Package hyperref Info: Hyper index ON on input line 2296.
+Package hyperref Info: Plain pages OFF on input line 2303.
+Package hyperref Info: Backreferencing OFF on input line 2308.
+Implicit mode ON; LaTeX internals redefined
+Package hyperref Info: Bookmarks ON on input line 2444.
+(/usr/share/texmf-texlive/tex/latex/ltxmisc/url.sty
+\Urlmuskip=\muskip11
+Package: url 2005/06/27  ver 3.2  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 2599.
+\Fld@menulength=\count105
+\Field@Width=\dimen125
+\Fld@charsize=\dimen126
+\Choice@toks=\toks24
+\Field@toks=\toks25
+Package hyperref Info: Hyper figures OFF on input line 3102.
+Package hyperref Info: Link nesting OFF on input line 3107.
+Package hyperref Info: Hyper index ON on input line 3110.
+Package hyperref Info: backreferencing OFF on input line 3117.
+Package hyperref Info: Link coloring ON on input line 3120.
+\Hy@abspage=\count106
+\c@Item=\count107
+)
+*hyperref using driver hpdftex*
+(/usr/share/texmf-texlive/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2007/02/07 v6.75r Hyperref driver for pdfTeX
+\Fld@listcount=\count108
+)
+
+LaTeX Warning: You have requested, on input line 185, version
+               `2011/04/17' of package hyperref,
+               but only version
+               `2007/02/07 v6.75r Hypertext links for LaTeX'
+               is available.
+
+\TmpLen=\skip57
+(./37030-t.aux)
+\openout1 = `37030-t.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 271.
+LaTeX Font Info:    ... okay on input line 271.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 271.
+LaTeX Font Info:    ... okay on input line 271.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 271.
+LaTeX Font Info:    ... okay on input line 271.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 271.
+LaTeX Font Info:    ... okay on input line 271.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 271.
+LaTeX Font Info:    ... okay on input line 271.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 271.
+LaTeX Font Info:    ... okay on input line 271.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 271.
+LaTeX Font Info:    ... okay on input line 271.
+(/usr/share/texmf-texlive/tex/latex/ragged2e/ragged2e.sty
+Package: ragged2e 2003/03/25 v2.04 ragged2e Package (MS)
+(/usr/share/texmf-texlive/tex/latex/everysel/everysel.sty
+Package: everysel 1999/06/08 v1.03 EverySelectfont Package (MS)
+LaTeX Info: Redefining \selectfont on input line 125.
+)
+\CenteringLeftskip=\skip58
+\RaggedLeftLeftskip=\skip59
+\RaggedRightLeftskip=\skip60
+\CenteringRightskip=\skip61
+\RaggedLeftRightskip=\skip62
+\RaggedRightRightskip=\skip63
+\CenteringParfillskip=\skip64
+\RaggedLeftParfillskip=\skip65
+\RaggedRightParfillskip=\skip66
+\JustifyingParfillskip=\skip67
+\CenteringParindent=\skip68
+\RaggedLeftParindent=\skip69
+\RaggedRightParindent=\skip70
+\JustifyingParindent=\skip71
+)
+Package caption Info: hyperref package v6.74m (or newer) detected on input line
+ 271.
+-------------------- Geometry parameters
+paper: class default
+landscape: --
+twocolumn: --
+twoside: true
+asymmetric: --
+h-parts: 9.03374pt, 325.215pt, 9.03375pt
+v-parts: 4.15848pt, 495.49379pt, 6.23773pt
+hmarginratio: 1:1
+vmarginratio: 2:3
+lines: --
+heightrounded: --
+bindingoffset: 0.0pt
+truedimen: --
+includehead: true
+includefoot: true
+includemp: --
+driver: pdftex
+-------------------- Page layout dimensions and switches
+\paperwidth  343.28249pt
+\paperheight 505.89pt
+\textwidth  325.215pt
+\textheight 433.62pt
+\oddsidemargin  -63.23625pt
+\evensidemargin -63.23624pt
+\topmargin  -68.11151pt
+\headheight 12.0pt
+\headsep    19.8738pt
+\footskip   30.0pt
+\marginparwidth 98.0pt
+\marginparsep   7.0pt
+\columnsep  10.0pt
+\skip\footins  10.8pt plus 4.0pt minus 2.0pt
+\hoffset 0.0pt
+\voffset 0.0pt
+\mag 1000
+\@twosidetrue \@mparswitchtrue 
+(1in=72.27pt, 1cm=28.45pt)
+-----------------------
+(/usr/share/texmf-texlive/tex/latex/graphics/color.sty
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+(/etc/texmf/tex/latex/config/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+(/usr/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2007/01/08 v0.04d Graphics/color for pdfTeX
+\Gread@gobject=\count109
+(/usr/share/texmf/tex/context/base/supp-pdf.tex
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count110
+\scratchdimen=\dimen127
+\scratchbox=\box28
+\nofMPsegments=\count111
+\nofMParguments=\count112
+\everyMPshowfont=\toks26
+\MPscratchCnt=\count113
+\MPscratchDim=\dimen128
+\MPnumerator=\count114
+\everyMPtoPDFconversion=\toks27
+)))
+Package hyperref Info: Link coloring ON on input line 271.
+(/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
+Package: nameref 2006/12/27 v2.28 Cross-referencing by name of section
+(/usr/share/texmf-texlive/tex/latex/oberdiek/refcount.sty
+Package: refcount 2006/02/20 v3.0 Data extraction from references (HO)
+)
+\c@section@level=\count115
+)
+LaTeX Info: Redefining \ref on input line 271.
+LaTeX Info: Redefining \pageref on input line 271.
+(./37030-t.out) (./37030-t.out)
+\@outlinefile=\write3
+\openout3 = `37030-t.out'.
+
+
+Overfull \hbox (44.54031pt too wide) in paragraph at lines 284--284
+[]\OT1/cmtt/m/n/8 Title: Some Famous Problems of the Theory of Numbers and in p
+articular Waring's Problem[] 
+ []
+
+
+Overfull \hbox (23.29001pt too wide) in paragraph at lines 295--295
+[]\OT1/cmtt/m/n/8 *** START OF THIS PROJECT GUTENBERG EBOOK FAMOUS PROBLEMS OF 
+THEORY OF NUMBERS ***[] 
+ []
+
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Try loading font information for U+msa on input line 310.
+(/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2002/01/19 v2.2g AMS font definitions
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 310.
+(/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2002/01/19 v2.2g AMS font definitions
+) [2
+
+] [1
+
+
+
+] [2] [1
+
+
+
+] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] 
+[19] [20]
+Overfull \hbox (5.66283pt too wide) detected at line 1250
+[]
+ []
+
+[21] [22] [23] [24] [25] [26] [27] [28]
+Overfull \hbox (6.59698pt too wide) detected at line 1575
+[]
+ []
+
+[29] [30] [31] [32] [33
+
+
+
+] [34]
+Overfull \hbox (14.78989pt too wide) in paragraph at lines 1690--1690
+[]\OT1/cmtt/m/n/8 *** END OF THIS PROJECT GUTENBERG EBOOK FAMOUS PROBLEMS OF TH
+EORY OF NUMBERS ***[] 
+ []
+
+[35] [36] [37] [38] [39] [40] [41] [42] (./37030-t.aux)
+
+ *File List*
+    book.cls    2005/09/16 v1.4f Standard LaTeX document class
+    bk12.clo    2005/09/16 v1.4f Standard LaTeX file (size option)
+inputenc.sty    2006/05/05 v1.1b Input encoding file
+  latin1.def    2006/05/05 v1.1b Input encoding file
+  ifthen.sty    2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+ amsmath.sty    2000/07/18 v2.13 AMS math features
+ amstext.sty    2000/06/29 v2.01
+  amsgen.sty    1999/11/30 v2.0
+  amsbsy.sty    1999/11/29 v1.2d
+  amsopn.sty    1999/12/14 v2.01 operator names
+ amssymb.sty    2002/01/22 v2.2d
+amsfonts.sty    2001/10/25 v2.2f
+   alltt.sty    1997/06/16 v2.0g defines alltt environment
+ caption.sty    2007/01/07 v3.0k Customising captions (AR)
+caption3.sty    2007/01/07 v3.0k caption3 kernel (AR)
+  keyval.sty    1999/03/16 v1.13 key=value parser (DPC)
+   array.sty    2005/08/23 v2.4b Tabular extension package (FMi)
+fancyhdr.sty    
+geometry.sty    2002/07/08 v3.2 Page Geometry
+geometry.cfg
+hyperref.sty    2007/02/07 v6.75r Hypertext links for LaTeX
+  pd1enc.def    2007/02/07 v6.75r Hyperref: PDFDocEncoding definition (HO)
+hyperref.cfg    2002/06/06 v1.2 hyperref configuration of TeXLive
+kvoptions.sty    2006/08/22 v2.4 Connects package keyval with LaTeX options (HO
+)
+     url.sty    2005/06/27  ver 3.2  Verb mode for urls, etc.
+ hpdftex.def    2007/02/07 v6.75r Hyperref driver for pdfTeX
+ragged2e.sty    2003/03/25 v2.04 ragged2e Package (MS)
+everysel.sty    1999/06/08 v1.03 EverySelectfont Package (MS)
+   color.sty    2005/11/14 v1.0j Standard LaTeX Color (DPC)
+   color.cfg    2007/01/18 v1.5 color configuration of teTeX/TeXLive
+  pdftex.def    2007/01/08 v0.04d Graphics/color for pdfTeX
+supp-pdf.tex
+ nameref.sty    2006/12/27 v2.28 Cross-referencing by name of section
+refcount.sty    2006/02/20 v3.0 Data extraction from references (HO)
+ 37030-t.out
+ 37030-t.out
+    umsa.fd    2002/01/19 v2.2g AMS font definitions
+    umsb.fd    2002/01/19 v2.2g AMS font definitions
+ ***********
+
+ ) 
+Here is how much of TeX's memory you used:
+ 4706 strings out of 94074
+ 64607 string characters out of 1165154
+ 126581 words of memory out of 1500000
+ 7862 multiletter control sequences out of 10000+50000
+ 17458 words of font info for 66 fonts, out of 1200000 for 2000
+ 645 hyphenation exceptions out of 8191
+ 35i,13n,43p,258b,484s stack positions out of 5000i,500n,6000p,200000b,5000s
+</usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmbx10.pfb></usr/share/texmf
+-texlive/fonts/type1/bluesky/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type
+1/bluesky/cm/cmcsc10.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmex1
+0.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmmi10.pfb></usr/share/t
+exmf-texlive/fonts/type1/bluesky/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/
+type1/bluesky/cm/cmmi6.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmm
+i8.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmr10.pfb></usr/share/t
+exmf-texlive/fonts/type1/bluesky/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/t
+ype1/bluesky/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmr6
+.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmr7.pfb></usr/share/texm
+f-texlive/fonts/type1/bluesky/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1
+/bluesky/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmsy6.p
+fb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmsy8.pfb></usr/share/texmf
+-texlive/fonts/type1/bluesky/cm/cmti10.pfb></usr/share/texmf-texlive/fonts/type
+1/bluesky/cm/cmti8.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmtt8.p
+fb></usr/share/texmf-texlive/fonts/type1/bluesky/ams/msam10.pfb>
+Output written on 37030-t.pdf (46 pages, 247814 bytes).
+PDF statistics:
+ 339 PDF objects out of 1000 (max. 8388607)
+ 66 named destinations out of 1000 (max. 131072)
+ 49 words of extra memory for PDF output out of 10000 (max. 10000000)
+
